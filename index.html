@@ -1,0 +1,3219 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AlgoVerse | دنیای الگوریتم‌ها</title>
+
+    <!-- فونت وزیرمتن -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+/* ================================
+   تم پاستلی: یاسی و صورتی
+   ================================ */
+
+:root {
+    --bg-1: #fff0f8;
+    --bg-2: #f0eaff;
+    --text: #4b3f63;
+    --text-soft: #7b6f93;
+
+    --lilac: #d9ccff;
+    --lilac-deep: #8f73d4;
+    --pink: #ffd1e6;
+    --pink-deep: #e8699f;
+
+    --card-radius: 20px;
+    --shadow: 0 8px 24px rgba(143, 115, 212, 0.15);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+body {
+    margin: 0;
+    font-family: "Vazirmatn", Tahoma, Arial, sans-serif;
+    direction: rtl;
+    line-height: 1.8;
+    color: var(--text);
+    background: linear-gradient(160deg, var(--bg-1) 0%, var(--bg-2) 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+}
+
+/* ---------- سربرگ و پانویس ---------- */
+
+header,
+footer {
+    text-align: center;
+    padding: 20px;
+}
+
+header {
+    padding: 36px 20px 40px;
+    background: linear-gradient(120deg, #ffd1e6 0%, #e3d6ff 100%);
+    border-radius: 0 0 40px 40px;
+    box-shadow: var(--shadow);
+}
+
+header h1 {
+    margin: 0 0 6px;
+    color: #5a3e9b;
+}
+
+header p {
+    margin: 0;
+    color: var(--text-soft);
+}
+
+footer {
+    color: var(--text-soft);
+}
+
+h2,
+h3 {
+    color: #5a3e9b;
+}
+
+main {
+    max-width: 1100px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+.welcome {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+/* ---------- کارت‌های الگوریتم ---------- */
+
+.algorithm-list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.algorithm-card {
+    background: #ffe6f2;
+    border: 2px solid #ffc3de;
+    border-radius: var(--card-radius);
+    padding: 22px 20px;
+    text-align: center;
+    box-shadow: var(--shadow);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.algorithm-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 28px rgba(143, 115, 212, 0.25);
+}
+
+.algorithm-card h3 {
+    margin: 0;
+}
+
+.algorithm-card p {
+    margin: 4px 0 14px;
+    color: var(--text-soft);
+    direction: ltr;
+}
+
+/* هر کارت یک رنگ پاستلی متفاوت دارد */
+.algorithm-card:nth-child(6n + 1) { background: #ffe6f2; border-color: #ffc3de; }  /* صورتی */
+.algorithm-card:nth-child(6n + 2) { background: #ece4ff; border-color: #d3c3ff; }  /* یاسی */
+.algorithm-card:nth-child(6n + 3) { background: #ffeadb; border-color: #ffd0ad; }  /* هلویی */
+.algorithm-card:nth-child(6n + 4) { background: #def5ea; border-color: #b9e8d0; }  /* نعنایی */
+.algorithm-card:nth-child(6n + 5) { background: #dcebff; border-color: #b8d5ff; }  /* آبی آسمانی */
+.algorithm-card:nth-child(6n + 6) { background: #fff6d6; border-color: #ffe8a0; }  /* لیمویی */
+
+/* ---------- دکمه‌ها و ورودی ---------- */
+
+button {
+    font-family: inherit;
+    padding: 9px 20px;
+    border: 2px solid var(--lilac);
+    border-radius: 999px;
+    background: #fff;
+    color: #5a3e9b;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s, transform 0.15s;
+}
+
+button:hover:not(:disabled) {
+    background: var(--pink);
+    border-color: #ffb3d4;
+    transform: translateY(-1px);
+}
+
+button:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+#algorithm-details input {
+    font-family: inherit;
+    padding: 9px 14px;
+    border: 2px solid var(--lilac);
+    border-radius: 999px;
+    background: #fff;
+    color: var(--text);
+    margin: 0 6px;
+}
+
+#algorithm-details input:focus {
+    outline: none;
+    border-color: var(--pink-deep);
+    box-shadow: 0 0 0 3px rgba(232, 105, 159, 0.18);
+}
+
+hr {
+    border: none;
+    border-top: 2px dashed var(--lilac);
+    margin: 20px 0;
+}
+
+/* ---------- بخش جزئیات و آزمایشگاه‌ها ---------- */
+
+#algorithm-details {
+    margin-top: 40px;
+    padding: 28px;
+    background: rgba(255, 255, 255, 0.7);
+    border: 2px solid #eadfff;
+    border-radius: 28px;
+    box-shadow: var(--shadow);
+}
+
+#insertion-lab,
+#quick-lab,
+#tsp-lab,
+#bf-lab,
+#kp-lab,
+#hf-lab {
+    margin: 20px 0;
+    padding: 22px;
+    background: #fbf7ff;
+    border: 2px solid #eadfff;
+    border-radius: var(--card-radius);
+}
+
+#insertion-lab button,
+#quick-lab button,
+#tsp-lab button,
+#bf-lab button,
+#kp-lab button,
+#hf-lab button {
+    margin: 4px 0;
+}
+
+#sort-result,
+#qs-result,
+#tsp-result,
+#bf-result,
+#kp-result,
+#hf-result {
+    font-weight: bold;
+    color: #3f8a64;
+}
+
+#bf-result.is-warning {
+    color: #c4457f;
+}
+
+#sort-analysis,
+#qs-analysis,
+#tsp-analysis,
+#bf-analysis,
+#kp-analysis,
+#hf-analysis {
+    color: var(--text-soft);
+}
+
+/* ---------- نمایش اعداد ---------- */
+
+.numbers-display {
+    direction: ltr;          /* اعداد همیشه به ترتیب آرایه از چپ به راست */
+    text-align: center;
+    min-height: 70px;
+    margin: 10px 0;
+}
+
+.num-box {
+    display: inline-block;
+    min-width: 46px;
+    min-height: 46px;
+    padding: 8px 14px;
+    margin: 5px;
+    border: 2px solid #d9ccff;
+    border-radius: 14px;
+    background: #fff;
+    color: var(--text);
+    text-align: center;
+    transition: background 0.25s, border-color 0.25s, opacity 0.25s, transform 0.25s, box-shadow 0.25s;
+}
+
+/* Quick Sort */
+.num-box.is-pivot   { background: #ffd9b8; border-color: #f0a05a; font-weight: bold; }
+.num-box.is-compare { background: #fff1a8; border-color: #ecc94b; }
+.num-box.is-small   { background: #d2e5ff; border-color: #8fb8f0; }
+.num-box.is-large   { background: #ffcfe0; border-color: #ee8fb2; }
+.num-box.is-sorted  { background: #cdf3dd; border-color: #7fcfa2; }
+.num-box.is-dim     { opacity: 0.4; }
+
+/* مرتب‌سازی درجی */
+.num-box.is-key      { background: #ffd9b8; border-color: #f0a05a; font-weight: bold;
+                       transform: translateY(-8px); box-shadow: 0 8px 14px rgba(240, 160, 90, 0.35); }
+.num-box.is-shifted  { background: #d2e5ff; border-color: #8fb8f0; }
+.num-box.is-placed   { background: #9be5b9; border-color: #4fb97f; font-weight: bold;
+                       box-shadow: 0 6px 12px rgba(79, 185, 127, 0.35); }
+.num-box.is-unsorted { background: #f1ecf8; border-color: #d8cfe8; color: #8b819c; }
+
+/* فروشنده دوره‌گرد (راهنمای رنگ) */
+.num-box.is-city  { background: #d2e5ff; border-color: #8fb8f0; }
+.num-box.is-start { background: #ffd9b8; border-color: #f0a05a; }
+.num-box.is-best  { background: #ffcfe0; border-color: #e8699f; }
+.num-box.is-final { background: #9be5b9; border-color: #4fb97f; }
+
+/* ---------- نقشه فروشنده دوره‌گرد ---------- */
+
+.tsp-display {
+    direction: ltr;
+    max-width: 640px;
+    margin: 10px auto;
+    background: #fff;
+    border: 2px solid #eadfff;
+    border-radius: var(--card-radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+}
+
+.tsp-display svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    font-family: inherit;
+}
+
+.tsp-edge {
+    fill: none;
+    stroke: #e8699f;
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-opacity: 0.75;
+}
+
+.tsp-edge.is-final {
+    stroke: #4fb97f;
+    stroke-width: 4;
+    stroke-opacity: 1;
+}
+
+.tsp-city {
+    fill: #d2e5ff;
+    stroke: #8fb8f0;
+    stroke-width: 3;
+}
+
+.tsp-city.is-start {
+    fill: #ffd9b8;
+    stroke: #f0a05a;
+}
+
+.tsp-label {
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 700;
+    fill: #4b3f63;
+    text-anchor: middle;
+    dominant-baseline: central;
+}
+
+/* ---------- بلمن–فورد ---------- */
+
+.num-box.is-skip { background: #e3d6ff; border-color: #8f73d4; }
+
+#bf-input {
+    width: min(100%, 470px);
+    text-align: left;
+}
+
+#bf-source {
+    width: 84px;
+}
+
+.bf-edge {
+    fill: none;
+    stroke-linecap: round;
+    stroke-width: 2.5;
+}
+
+.bf-edge.is-base    { stroke: #cbbfe6; }
+.bf-edge.is-tree    { stroke: #4fb97f; stroke-width: 3; }
+.bf-edge.is-good    { stroke: #4fb97f; stroke-width: 5; }
+.bf-edge.is-skip    { stroke: #8f73d4; stroke-width: 4; }
+.bf-edge.is-current { stroke: #ecc94b; stroke-width: 5; }
+.bf-edge.is-bad     { stroke: #e8699f; stroke-width: 5; }
+
+.bf-weight,
+.bf-dist,
+.bf-label {
+    font-family: inherit;
+    text-anchor: middle;
+    dominant-baseline: central;
+}
+
+.bf-weight {
+    font-size: 14px;
+    font-weight: 700;
+    fill: #5a3e9b;
+    stroke: #fff;
+    stroke-width: 4px;
+    paint-order: stroke;
+}
+
+.bf-node {
+    fill: #d2e5ff;
+    stroke: #8fb8f0;
+    stroke-width: 3;
+}
+
+.bf-node.is-source    { fill: #ffd9b8; stroke: #f0a05a; }
+.bf-node.is-unreached { fill: #f1ecf8; stroke: #d8cfe8; }
+.bf-node.is-updated   { fill: #9be5b9; stroke: #4fb97f; }
+
+.bf-label {
+    font-size: 15px;
+    font-weight: 700;
+    fill: #4b3f63;
+}
+
+.bf-dist {
+    font-size: 14px;
+    fill: #7b6f93;
+    stroke: #fff;
+    stroke-width: 4px;
+    paint-order: stroke;
+}
+
+.bf-dist.is-updated {
+    font-weight: 700;
+    fill: #3f8a64;
+}
+
+/* ---------- کوله‌پشتی صفر و یک ---------- */
+
+#kp-input {
+    width: min(100%, 420px);
+    text-align: left;
+}
+
+#kp-capacity {
+    width: 84px;
+}
+
+.kp-wrap {
+    direction: ltr;
+    overflow-x: auto;
+    margin: 10px 0;
+    padding: 12px;
+    background: #fff;
+    border: 2px solid #eadfff;
+    border-radius: var(--card-radius);
+    box-shadow: var(--shadow);
+}
+
+.kp-table {
+    border-collapse: separate;
+    border-spacing: 4px;
+    margin: 0 auto;
+}
+
+.kp-table th,
+.kp-table td {
+    min-width: 40px;
+    height: 40px;
+    padding: 0 6px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.kp-table th {
+    background: #f1ecf8;
+    border: 2px solid #e3d6ff;
+    color: #5a3e9b;
+    font-weight: 700;
+}
+
+.kp-table th.kp-row-head {
+    min-width: 96px;
+    padding: 4px 10px;
+    line-height: 1.4;
+    white-space: nowrap;
+}
+
+.kp-row-head small {
+    display: block;
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--text-soft);
+}
+
+.kp-cell {
+    background: #fff;
+    border: 2px solid #d9ccff;
+    color: var(--text);
+    transition: background 0.25s, border-color 0.25s, box-shadow 0.25s;
+}
+
+.kp-cell.is-empty   { background: #f1ecf8; border-color: #d8cfe8; }
+.kp-cell.is-skip    { background: #d2e5ff; border-color: #8fb8f0; font-weight: 700; }
+.kp-cell.is-take    { background: #ffcfe0; border-color: #e8699f; font-weight: 700; }
+.kp-cell.is-path    { background: #9be5b9; border-color: #4fb97f; font-weight: 700; }
+.kp-cell.is-current { background: #ffd9b8; border-color: #f0a05a; font-weight: 700;
+                      box-shadow: 0 6px 12px rgba(240, 160, 90, 0.35); }
+
+/* ---------- راهنمای رنگ ---------- */
+
+.legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    list-style: none;
+    padding: 0;
+    margin: 0 0 10px;
+    color: var(--text-soft);
+}
+
+.legend .num-box {
+    min-width: 22px;
+    min-height: 22px;
+    padding: 0;
+    margin: 0 0 -6px 6px;
+    border-radius: 8px;
+    transform: none;
+    box-shadow: none;
+}
+
+/* ---------- واکنش‌گرایی ---------- */
+
+@media (max-width: 750px) {
+    .algorithm-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 480px) {
+    .algorithm-list {
+        grid-template-columns: 1fr;
+    }
+
+    #algorithm-details {
+        padding: 16px;
+    }
+
+    #insertion-lab,
+    #quick-lab,
+    #tsp-lab,
+    #bf-lab,
+    #kp-lab,
+#hf-lab {
+        padding: 14px;
+    }
+}
+
+/* ---------- آزمایشگاه هافمن ---------- */
+.hf-forest { display:flex; align-items:flex-start; gap:18px; overflow-x:auto; padding:22px 12px; margin:12px 0; background:#fff; border:2px solid #eadfff; border-radius:var(--card-radius); box-shadow:var(--shadow); direction:ltr; min-height:100px; }
+.hf-node-wrap { display:flex; flex-direction:column; align-items:center; flex-shrink:0; }
+.hf-node { padding:8px 12px; min-width:58px; text-align:center; border:2px solid #d3c3ff; border-radius:13px; background:#ece4ff; color:#4b3f63; font-weight:700; white-space:nowrap; }
+.hf-node.is-leaf { background:#dcebff; border-color:#b8d5ff; }
+.hf-node.is-selected { background:#ffd9b8; border-color:#f0a05a; box-shadow:0 4px 10px #f0a05a55; }
+.hf-node.is-merged { background:#def5ea; border-color:#8fd4ad; }
+.hf-children { display:flex; gap:12px; justify-content:center; padding-top:14px; }
+.hf-branch { display:flex; flex-direction:column; align-items:center; position:relative; }
+.hf-branch:before { content:""; height:12px; border-left:2px solid #cbbfe6; position:absolute; top:-14px; }
+.hf-bit { font-size:12px; color:#8f73d4; font-weight:700; margin-bottom:5px; }
+.hf-code-table { border-collapse:separate; border-spacing:5px; margin:14px auto; width:min(100%,520px); }
+.hf-code-table th,.hf-code-table td { padding:8px 12px; text-align:center; border-radius:10px; }
+.hf-code-table th { background:#ece4ff; border:1px solid #d3c3ff; color:#5a3e9b; }
+.hf-code-table td { background:#fff0f8; border:1px solid #ffc3de; direction:ltr; }
+
+/* =====================================================
+   AlgoVerse refresh — pastel minimal, responsive, themes
+   ===================================================== */
+:root {
+    color-scheme: light;
+    --page: #f8f7fc;
+    --surface: #ffffff;
+    --surface-soft: #f5f1ff;
+    --surface-tint: #fbf9ff;
+    --ink: #29243b;
+    --muted: #77718d;
+    --line: #e8e2f4;
+    --accent: #8066c9;
+    --accent-strong: #6749b3;
+    --accent-soft: #e9e1ff;
+    --shadow-soft: 0 12px 36px rgba(68, 48, 115, .08);
+    --shadow-hover: 0 18px 42px rgba(68, 48, 115, .14);
+}
+:root[data-theme="dark"] {
+    color-scheme: dark;
+    --page: #171522;
+    --surface: #211e30;
+    --surface-soft: #2a2540;
+    --surface-tint: #252136;
+    --ink: #f1edf9;
+    --muted: #b0a8c6;
+    --line: #403753;
+    --accent: #b9a4ff;
+    --accent-strong: #d0c2ff;
+    --accent-soft: #39304f;
+    --shadow-soft: 0 12px 36px rgba(0, 0, 0, .18);
+    --shadow-hover: 0 18px 42px rgba(0, 0, 0, .28);
+}
+html { scroll-behavior: smooth; scroll-padding-top: 24px; }
+body {
+    color: var(--ink);
+    background: var(--page);
+    background-image: radial-gradient(ellipse at 12% 0%, rgba(224, 211, 255, .34), transparent 36%),
+                      radial-gradient(ellipse at 94% 30%, rgba(255, 220, 236, .22), transparent 30%);
+    transition: background-color .25s ease, color .25s ease;
+}
+:root[data-theme="dark"] body {
+    background-image: radial-gradient(ellipse at 12% 0%, rgba(94, 72, 145, .18), transparent 36%),
+                      radial-gradient(ellipse at 94% 30%, rgba(120, 61, 99, .12), transparent 30%);
+}
+.site-header {
+    position: relative; overflow: hidden; isolation: isolate;
+    text-align: right; padding: 22px max(24px, calc((100% - 1120px)/2)) 62px;
+    border-radius: 0 0 36px 36px;
+    background: linear-gradient(118deg, #eee7ff 0%, #fce8f1 55%, #e6f5f0 100%);
+    box-shadow: var(--shadow-soft); color: #33284e;
+}
+:root[data-theme="dark"] .site-header { background: linear-gradient(118deg, #302744, #382638 55%, #203a39); color: #f3edff; }
+.header-topline { position: relative; z-index: 2; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.brand-mark { width: 44px; height: 44px; display: grid; place-items: center; border-radius: 15px; background: rgba(255,255,255,.68); border: 1px solid rgba(255,255,255,.9); color: #7459ba; font-size: 17px; font-weight: 800; box-shadow: 0 6px 20px #6c55a51a; direction:ltr; }
+.brand-mark span { color: #df79a7; }
+.theme-toggle { display: inline-flex; align-items: center; gap: 8px; padding: 9px 15px; border: 1px solid rgba(120,98,165,.2); background: rgba(255,255,255,.64); color: #574876; box-shadow: none; font-size: 13px; }
+.theme-toggle:hover:not(:disabled) { background: #fff; border-color: #c6b7ee; }
+.header-copy { position: relative; z-index: 1; max-width: 760px; padding-top: 34px; }
+.header-copy .eyebrow { letter-spacing: 2px; direction: ltr; text-align: right; font-size: 10px; font-weight: 700; color: #8a75ba; margin: 0 0 10px; }
+.header-copy h1 { color: #44345f; font-size: clamp(27px, 4vw, 43px); line-height: 1.45; margin: 0 0 10px; letter-spacing: -.7px; }
+.header-copy h1 span { display: block; font-size: .58em; font-weight: 500; color: #7b6b98; }
+.header-copy > p:last-child { margin: 0; color: #75678d; font-size: 15px; }
+:root[data-theme="dark"] .header-copy h1 { color: #f3edff; }
+:root[data-theme="dark"] .header-copy h1 span, :root[data-theme="dark"] .header-copy > p:last-child { color: #c1b5dc; }
+.header-orbit { position: absolute; z-index: -1; border: 1px solid rgba(135,110,191,.2); border-radius: 50%; pointer-events:none; }
+.orbit-one { width: 330px; height: 330px; left: 8%; top: -130px; box-shadow: 0 0 0 30px rgba(255,255,255,.12), 0 0 0 65px rgba(255,255,255,.08); }
+.orbit-two { width: 180px; height: 180px; left: 19%; bottom: -125px; background: rgba(255,255,255,.12); }
+main { max-width: 1120px; margin: 30px auto 48px; padding: 0 24px; }
+.welcome { display:flex; align-items:center; justify-content:space-between; gap:32px; text-align:right; margin: 0 0 44px; padding: 30px 34px; border:1px solid var(--line); border-radius:26px; background:var(--surface); box-shadow:var(--shadow-soft); }
+.welcome-copy { max-width: 650px; }
+.section-kicker { display:inline-block; color:var(--accent); font-size:12px; font-weight:700; margin-bottom:7px; }
+.welcome h2 { color:var(--ink); font-size:clamp(22px,3vw,31px); line-height:1.55; margin:0 0 8px; }
+.welcome h2 span { color:var(--accent); }
+.welcome p { color:var(--muted); margin:0; }
+.welcome-art { position:relative; flex:0 0 150px; height:130px; display:grid; place-items:center; }
+.art-core { width:90px; height:90px; border-radius:28px; transform:rotate(12deg); background:linear-gradient(145deg,#eee7ff,#fce6f0); border:1px solid #e2d7fb; display:grid; grid-template-columns:repeat(3,1fr); gap:7px; padding:16px; box-shadow:0 12px 25px #8066c91c; }
+.art-core i { border-radius:6px; background:#b7a3ee; } .art-core i:nth-child(2n) { background:#f3b6d1; } .art-core i:nth-child(3n) { background:#a9ddca; }
+.art-chip { position:absolute; z-index:1; display:grid; place-items:center; min-width:36px; height:34px; padding:0 7px; border-radius:11px; font-size:12px; font-weight:800; box-shadow:0 6px 18px #4c38641c; }
+.chip-a { top:3px; right:4px; color:#7355b9; background:#e8e0ff; }.chip-b { bottom:4px; right:12px; color:#387b68; background:#dff5e9; }.chip-c { top:25px; left:2px; color:#b74e80; background:#ffe2ef; font-size:18px; }
+.section-heading { display:flex; align-items:end; justify-content:space-between; gap:16px; margin:0 0 20px; }
+.section-heading h2 { margin:0; color:var(--ink); font-size:24px; }
+.algorithm-count { color:var(--muted); background:var(--surface); border:1px solid var(--line); border-radius:999px; padding:7px 13px; font-size:12px; white-space:nowrap; }
+.algorithm-list { grid-template-columns:repeat(3,minmax(0,1fr)); gap:17px; }
+.algorithm-card { position:relative; overflow:hidden; min-height:220px; padding:24px 22px 22px; text-align:right; border:1px solid var(--line) !important; border-radius:22px; background:var(--surface) !important; box-shadow:var(--shadow-soft); transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease; }
+.algorithm-card::after { content:""; position:absolute; width:110px; height:110px; left:-45px; bottom:-48px; border-radius:50%; background:var(--card-tint,#eee7ff); opacity:.65; pointer-events:none; }
+.algorithm-card:nth-child(6n+1) { --card-tint:#ffe2ef; --icon-bg:#ffedf5; --icon-ink:#c85f91; }
+.algorithm-card:nth-child(6n+2) { --card-tint:#e7e0ff; --icon-bg:#f0ebff; --icon-ink:#8066c9; }
+.algorithm-card:nth-child(6n+3) { --card-tint:#ffe8d8; --icon-bg:#fff1e6; --icon-ink:#c37d48; }
+.algorithm-card:nth-child(6n+4) { --card-tint:#dff5eb; --icon-bg:#eafaf2; --icon-ink:#3f997b; }
+.algorithm-card:nth-child(6n+5) { --card-tint:#e0edff; --icon-bg:#eef5ff; --icon-ink:#5d8dcc; }
+.algorithm-card:nth-child(6n+6) { --card-tint:#fff3ce; --icon-bg:#fff8df; --icon-ink:#b08c35; }
+.algorithm-card:hover { transform:translateY(-5px); box-shadow:var(--shadow-hover); border-color:#cfc2ef !important; }
+.card-icon { display:grid; place-items:center; width:48px; height:48px; border-radius:16px; background:var(--icon-bg); color:var(--icon-ink); font-size:24px; margin-bottom:17px; }
+.card-category { display:block; color:var(--muted); font-size:11px; font-weight:600; margin-bottom:3px; }
+.algorithm-card h3 { position:relative; z-index:1; color:var(--ink); font-size:17px; margin:0; }
+.algorithm-card p { position:relative; z-index:1; direction:ltr; text-align:right; font-size:12px; color:var(--muted); margin:2px 0 15px; }
+.algorithm-card button { position:relative; z-index:1; padding:8px 15px; border:1px solid #dcd2f5; background:#f7f3ff; color:#6e55b0; font-size:12px; font-weight:600; }
+.algorithm-card button:hover:not(:disabled) { background:#e9e1ff; border-color:#c9baf0; }
+button { border:1px solid #d8ccef; background:var(--surface); color:var(--accent-strong); font-weight:600; box-shadow:0 2px 5px rgba(65,46,107,.03); transition:background .18s ease, border-color .18s ease, transform .18s ease; }
+button:hover:not(:disabled) { background:var(--accent-soft); border-color:#c8b9ef; }
+button:focus-visible, input:focus-visible { outline:3px solid rgba(151,124,221,.35); outline-offset:2px; }
+#algorithm-details { margin-top:30px; padding:clamp(18px,3vw,32px); background:var(--surface); border:1px solid var(--line); border-radius:26px; box-shadow:var(--shadow-soft); }
+#algorithm-title { margin-top:0; color:var(--ink); font-size:clamp(23px,3vw,30px); }
+#algorithm-description { color:var(--muted); padding:13px 16px; border-right:3px solid #c7b6f0; background:var(--surface-soft); border-radius:12px 0 0 12px; }
+#insertion-lab,#quick-lab,#tsp-lab,#bf-lab,#kp-lab,#hf-lab { background:var(--surface-tint); border:1px solid var(--line); border-radius:20px; padding:clamp(15px,2.5vw,24px); }
+#insertion-lab h3,#quick-lab h3,#tsp-lab h3,#bf-lab h3,#kp-lab h3,#hf-lab h3 { color:var(--ink); }
+#algorithm-details input { max-width:100%; border:1px solid #dcd4ec; background:var(--surface); color:var(--ink); border-radius:12px; padding:10px 13px; margin:5px; }
+:root[data-theme="dark"] #algorithm-details input { border-color:var(--line); }
+hr { border-top:1px solid var(--line); }
+footer { padding:22px; color:var(--muted); border-top:1px solid var(--line); background:var(--surface); font-size:13px; }
+footer strong { color:var(--accent); } footer span { padding:0 5px; }
+/* Dark mode: preserve the algorithm's semantic step colors, but soften all surfaces. */
+:root[data-theme="dark"] .welcome,
+:root[data-theme="dark"] .algorithm-card,
+:root[data-theme="dark"] #algorithm-details,
+:root[data-theme="dark"] #insertion-lab,
+:root[data-theme="dark"] #quick-lab,
+:root[data-theme="dark"] #tsp-lab,
+:root[data-theme="dark"] #bf-lab,
+:root[data-theme="dark"] #kp-lab,
+:root[data-theme="dark"] #hf-lab,
+:root[data-theme="dark"] footer { background:var(--surface) !important; color:var(--ink); border-color:var(--line) !important; }
+:root[data-theme="dark"] .algorithm-card::after { opacity:.12; }
+:root[data-theme="dark"] .card-icon { background:var(--surface-soft); color:var(--accent); }
+:root[data-theme="dark"] .algorithm-card button { background:var(--surface-soft); color:var(--accent-strong); border-color:var(--line); }
+:root[data-theme="dark"] .algorithm-card button:hover:not(:disabled) { background:#39304f; }
+:root[data-theme="dark"] .theme-toggle { background:#2b263a; border-color:#4c4165; color:#eee7ff; }
+:root[data-theme="dark"] .brand-mark { background:#29233b; border-color:#51436f; color:#c9b9ff; }
+:root[data-theme="dark"] #algorithm-description { background:var(--surface-soft); color:var(--muted); }
+:root[data-theme="dark"] .hf-forest,
+:root[data-theme="dark"] .kp-cell,
+:root[data-theme="dark"] .hf-code-table td,
+:root[data-theme="dark"] .num-box { background:#29253a; color:var(--ink); border-color:#514665; }
+:root[data-theme="dark"] .hf-code-table th,
+:root[data-theme="dark"] .kp-table th { background:#38304c; color:#e8dfff; border-color:#55476f; }
+:root[data-theme="dark"] .kp-cell.is-empty { background:#302b40; }
+:root[data-theme="dark"] .hf-node { color:#30263f; }
+:root[data-theme="dark"] .hf-bit { color:#c2adff; }
+:root[data-theme="dark"] .legend { color:var(--muted); }
+:root[data-theme="dark"] .algorithm-count { background:var(--surface); color:var(--muted); border-color:var(--line); }
+:root[data-theme="dark"] .section-heading h2,
+:root[data-theme="dark"] .welcome h2 { color:var(--ink); }
+@media (max-width: 760px) {
+    .site-header { padding:18px 22px 42px; }
+    .header-copy { padding-top:28px; }
+    main { padding:0 16px; margin-top:22px; }
+    .welcome { padding:23px; gap:14px; }
+    .welcome-art { flex-basis:105px; transform:scale(.85); transform-origin:center; }
+    .algorithm-list { grid-template-columns:repeat(2,minmax(0,1fr)); gap:13px; }
+    .algorithm-card { min-height:210px; padding:18px 16px; }
+}
+@media (max-width: 520px) {
+    .site-header { border-radius:0 0 25px 25px; }
+    .header-copy h1 { font-size:28px; }
+    .header-copy h1 span { font-size:.56em; }
+    .welcome { padding:20px; }
+    .welcome-art { display:none; }
+    .section-heading { align-items:flex-start; flex-direction:column; gap:8px; }
+    .section-heading h2 { font-size:21px; }
+    .algorithm-list { grid-template-columns:1fr; }
+    .algorithm-card { min-height:0; display:grid; grid-template-columns:48px 1fr; column-gap:13px; align-items:center; }
+    .card-icon { grid-row:span 3; margin:0; }
+    .card-category,.algorithm-card h3,.algorithm-card p { grid-column:2; }
+    .algorithm-card p { margin:0 0 9px; }
+    .algorithm-card button { grid-column:2; justify-self:start; }
+    #algorithm-details { padding:14px; }
+    #insertion-lab,#quick-lab,#tsp-lab,#bf-lab,#kp-lab,#hf-lab { padding:13px; }
+    .theme-toggle span { display:none; }
+}
+@media (prefers-reduced-motion: reduce) { *,*::before,*::after { scroll-behavior:auto !important; transition:none !important; animation:none !important; } }
+
+/* Bilingual controls and automatic writing direction */
+.header-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.language-toggle{letter-spacing:.02em}
+html[dir="ltr"] body{font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
+html[dir="ltr"] .header-copy,html[dir="ltr"] .welcome-copy,html[dir="ltr"] .section-heading,html[dir="ltr"] .algorithm-card{text-align:left}
+html[dir="ltr"] .algorithm-list{direction:ltr}
+html[dir="ltr"] .legend{padding-left:1.25rem;padding-right:0}
+html[dir="ltr"] input:not([dir="ltr"]),html[dir="ltr"] textarea:not([dir="ltr"]){text-align:left}
+html[dir="rtl"] .header-actions{direction:rtl}
+
+/* Mobile-first hardening: keep the full interactive labs usable on narrow screens. */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { width: 100%; max-width: 100%; }
+body { overflow-x: hidden; }
+img, svg, canvas, video { max-width: 100%; }
+button, input, select, textarea { max-width: 100%; font: inherit; }
+button { min-height: 40px; touch-action: manipulation; }
+.algorithm-list { min-width: 0; }
+#algorithm-details, #algorithm-details *, #insertion-lab, #quick-lab, #tsp-lab, #bf-lab, #kp-lab, #hf-lab { min-width: 0; }
+#algorithm-details pre, #algorithm-details code, .code-block, .pseudocode { max-width: 100%; overflow-x: auto; }
+#algorithm-details table, .kp-table, .hf-code-table { display: block; max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+#algorithm-details input, #algorithm-details select, #algorithm-details textarea { width: auto; min-height: 42px; }
+#algorithm-details button, #insertion-lab button, #quick-lab button, #tsp-lab button, #bf-lab button, #kp-lab button, #hf-lab button { min-height: 42px; }
+
+@media (max-width: 600px) {
+  .site-header { padding: 14px 16px 32px; }
+  .header-topline { align-items: flex-start; gap: 10px; }
+  .header-actions { gap: 7px; }
+  .theme-toggle { min-height: 42px; padding: 8px 11px; }
+  .header-copy { padding-top: 22px; }
+  .header-copy h1 { font-size: clamp(25px, 7vw, 30px); overflow-wrap: anywhere; }
+  .header-copy h1 span { font-size: .62em; }
+  .header-copy > p:last-child { font-size: 14px; }
+  main { padding-inline: 12px; margin: 16px auto 32px; }
+  .welcome { padding: 17px; margin-bottom: 30px; border-radius: 20px; }
+  .welcome h2 { font-size: clamp(20px, 5.6vw, 25px); }
+  .section-heading h2 { font-size: 20px; }
+  .algorithm-card { overflow-wrap: anywhere; }
+  #algorithm-details { margin-top: 20px; border-radius: 19px; padding: 13px; }
+  #algorithm-title { overflow-wrap: anywhere; }
+  #algorithm-description { padding: 11px; }
+  #insertion-lab, #quick-lab, #tsp-lab, #bf-lab, #kp-lab, #hf-lab { padding: 11px; border-radius: 15px; }
+  #algorithm-details input, #algorithm-details select, #algorithm-details textarea { max-width: 100%; }
+  #algorithm-details button { margin-block: 3px; }
+  footer { padding: 18px 12px; overflow-wrap: anywhere; }
+}
+@media (max-width: 360px) {
+  .site-header { padding-inline: 12px; }
+  .brand-mark { width: 38px; height: 38px; flex: 0 0 38px; }
+  .header-actions { gap: 5px; }
+  .theme-toggle { padding: 7px 9px; font-size: 12px; }
+  main { padding-inline: 9px; }
+  .welcome { padding: 14px; }
+  .algorithm-card { padding: 14px 12px; }
+}
+
+    
+/* Mobile touch support */
+@media (max-width: 600px) {
+  button, input, select, textarea { font-size: 16px; }
+  button { min-height: 44px; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+  .algorithm-card button { min-height: 44px; padding: 10px 14px; }
+  .header-actions { flex-wrap: wrap; }
+  .algorithm-grid, .algorithms-grid { grid-template-columns: minmax(0, 1fr) !important; }
+  #algorithm-details { scroll-margin-top: 12px; }
+}
+</style>
+</head>
+
+<body>
+
+    <header class="site-header">
+        <div class="header-topline">
+            <div class="brand-mark" aria-hidden="true">A<span>V</span></div>
+            <div class="header-actions"><button id="language-toggle" class="theme-toggle language-toggle" type="button" aria-label="Switch language to English" title="فارسی / English">EN <span>English</span></button><button id="theme-toggle" class="theme-toggle" type="button" aria-label="تغییر تم" title="تغییر تم روشن و تیره">☾ <span>حالت تیره</span></button></div>
+        </div>
+        <div class="header-copy">
+            <p class="eyebrow">LEARN · EXPLORE · ANALYZE</p>
+            <h1>AlgoVerse <span>آزمایشگاه الگوریتم‌ها</span></h1>
+            <p>از ایده تا اجرا؛ الگوریتم‌ها را قدم‌به‌قدم کشف کن.</p>
+        </div>
+        <div class="header-orbit orbit-one" aria-hidden="true"></div>
+        <div class="header-orbit orbit-two" aria-hidden="true"></div>
+    </header>
+
+    <main>
+        <section class="welcome">
+            <div class="welcome-copy">
+                <span class="section-kicker">فضای یادگیری تعاملی</span>
+                <h2>الگوریتم‌ها را فقط نخوان؛ <span>اجراشان کن.</span></h2>
+                <p>ورودی بده، مراحل را دنبال کن و نتیجه را با چشم خودت ببین.</p>
+            </div>
+            <div class="welcome-art" aria-hidden="true">
+                <span class="art-chip chip-a">{ }</span><span class="art-chip chip-b">01</span><span class="art-chip chip-c">↗</span>
+                <div class="art-core"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            </div>
+        </section>
+
+        <section class="algorithms">
+            <div class="section-heading">
+                <div><span class="section-kicker">کتابخانه الگوریتم‌ها</span><h2>از کجا شروع می‌کنیم؟</h2></div>
+                <span class="algorithm-count">۶ آزمایشگاه تعاملی</span>
+            </div>
+
+            <div class="algorithm-list">
+
+                <article class="algorithm-card">
+                    <div class="card-icon" aria-hidden="true">↕</div>
+                    <span class="card-category">مرتب‌سازی</span>
+                    <h3>مرتب‌سازی درجی</h3>
+                    <p>Insertion Sort</p>
+                    <button>شروع یادگیری</button>
+                </article>
+
+                <article class="algorithm-card">
+                    <div class="card-icon" aria-hidden="true">⌁</div>
+                    <span class="card-category">مرتب‌سازی</span>
+                    <h3>مرتب‌سازی سریع</h3>
+                    <p>Quick Sort</p>
+                    <button>شروع یادگیری</button>
+                </article>
+
+                <article class="algorithm-card">
+                    <div class="card-icon" aria-hidden="true">◎</div>
+                    <span class="card-category">بهینه‌سازی</span>
+                    <h3>فروشنده دوره‌گرد</h3>
+                    <p>Traveling Salesperson</p>
+                    <button>شروع یادگیری</button>
+                </article>
+
+                <article class="algorithm-card">
+                    <div class="card-icon" aria-hidden="true">⇄</div>
+                    <span class="card-category">گراف و مسیر</span>
+                    <h3>بلمن–فورد</h3>
+                    <p>Bellman–Ford</p>
+                    <button>شروع یادگیری</button>
+                </article>
+
+                <article class="algorithm-card">
+                    <div class="card-icon" aria-hidden="true">▦</div>
+                    <span class="card-category">برنامه‌ریزی پویا</span>
+                    <h3>کوله‌پشتی صفر و یک</h3>
+                    <p>0/1 Knapsack</p>
+                    <button>شروع یادگیری</button>
+                </article>
+
+                <article class="algorithm-card">
+                    <div class="card-icon" aria-hidden="true">⌘</div>
+                    <span class="card-category">فشرده‌سازی</span>
+                    <h3>الگوریتم هافمن</h3>
+                    <p>Huffman Coding</p>
+                    <button>شروع یادگیری</button>
+                </article>
+
+            </div>
+        </section>
+
+        <section id="algorithm-details" hidden>
+
+            <h2 id="algorithm-title"></h2>
+
+            <p id="algorithm-description"></p>
+
+            <!-- آزمایشگاه مرتب‌سازی درجی -->
+            <div id="insertion-lab" hidden>
+
+                <h3>آزمایشگاه مرتب‌سازی درجی</h3>
+
+                <p>چند عدد وارد کن و مراحل مرتب‌سازی را ببین.</p>
+
+                <label for="numbers-input">اعداد موردنظر:</label>
+
+                <input
+                    type="text"
+                    id="numbers-input"
+                    value="5, 2, 4, 1, 3"
+                    placeholder="مثلاً 5, 2, 4, 1, 3"
+                >
+
+                <button id="start-sort">شروع مرتب‌سازی</button>
+
+                <hr>
+
+                <h3>وضعیت اعداد</h3>
+
+                <ul class="legend">
+                    <li><span class="num-box is-key"></span> عدد در حال جاگذاری</li>
+                    <li><span class="num-box is-shifted"></span> یک خانه به راست رفته</li>
+                    <li><span class="num-box is-sorted"></span> بخش مرتب‌شده</li>
+                    <li><span class="num-box is-placed"></span> تازه جا افتاده</li>
+                    <li><span class="num-box is-unsorted"></span> هنوز بررسی نشده</li>
+                </ul>
+
+                <div id="numbers-display" class="numbers-display"></div>
+
+                <p id="step-description">هنوز مرتب‌سازی شروع نشده است.</p>
+
+                <button id="previous-step" disabled>مرحله قبل</button>
+                <button id="next-step" disabled>مرحله بعد</button>
+                <button id="auto-sort" disabled>اجرای خودکار</button>
+                <button id="reset-sort">شروع مجدد</button>
+
+                <p id="sort-result"></p>
+                <p id="sort-analysis"></p>
+
+            </div>
+
+            <!-- آزمایشگاه مرتب‌سازی سریع -->
+            <div id="quick-lab" hidden>
+
+                <h3>آزمایشگاه مرتب‌سازی سریع</h3>
+
+                <p>
+                    چند عدد وارد کن (حداکثر ۳۰ عدد). در هر بازه، آخرین عنصر
+                    به‌عنوان محور انتخاب می‌شود.
+                </p>
+
+                <label for="qs-input">اعداد موردنظر:</label>
+
+                <input
+                    type="text"
+                    id="qs-input"
+                    value="8, 3, 7, 1, 5, 9, 2"
+                    placeholder="مثلاً 8, 3, 7, 1, 5, 9, 2"
+                >
+
+                <button id="qs-start">شروع مرتب‌سازی</button>
+
+                <hr>
+
+                <h3>وضعیت اعداد</h3>
+
+                <ul class="legend">
+                    <li><span class="num-box is-pivot"></span> محور</li>
+                    <li><span class="num-box is-compare"></span> در حال مقایسه</li>
+                    <li><span class="num-box is-small"></span> کوچک‌تر از محور</li>
+                    <li><span class="num-box is-large"></span> بزرگ‌تر از محور</li>
+                    <li><span class="num-box is-sorted"></span> در جای نهایی</li>
+                </ul>
+
+                <div id="qs-display" class="numbers-display"></div>
+
+                <p id="qs-step">هنوز مرتب‌سازی شروع نشده است.</p>
+
+                <button id="qs-prev" disabled>مرحله قبل</button>
+                <button id="qs-next" disabled>مرحله بعد</button>
+                <button id="qs-auto" disabled>اجرای خودکار</button>
+                <button id="qs-reset">شروع مجدد</button>
+
+                <p id="qs-result"></p>
+                <p id="qs-analysis"></p>
+
+            </div>
+
+            <!-- آزمایشگاه فروشنده دوره‌گرد -->
+            <div id="tsp-lab" hidden>
+
+                <h3>آزمایشگاه فروشنده دوره‌گرد</h3>
+
+                <p>
+                    تعداد شهرها را وارد کن (۳ تا ۹ شهر). شهرها به‌صورت تصادفی روی نقشه
+                    ساخته می‌شوند و الگوریتم همه دورهای ممکن را از شهر ۱ بررسی می‌کند
+                    تا کوتاه‌ترین دور را پیدا کند.
+                </p>
+
+                <label for="tsp-input">تعداد شهرها:</label>
+
+                <input
+                    type="number"
+                    id="tsp-input"
+                    value="6"
+                    min="3"
+                    max="9"
+                >
+
+                <button id="tsp-start">ساخت شهرها و شروع</button>
+
+                <hr>
+
+                <h3>وضعیت نقشه</h3>
+
+                <ul class="legend">
+                    <li><span class="num-box is-start"></span> شهر شروع</li>
+                    <li><span class="num-box is-city"></span> سایر شهرها</li>
+                    <li><span class="num-box is-best"></span> بهترین دور تا این لحظه</li>
+                    <li><span class="num-box is-final"></span> کوتاه‌ترین دور نهایی</li>
+                </ul>
+
+                <div id="tsp-display" class="tsp-display"></div>
+
+                <p id="tsp-step">هنوز جست‌وجو شروع نشده است.</p>
+
+                <button id="tsp-prev" disabled>مرحله قبل</button>
+                <button id="tsp-next" disabled>مرحله بعد</button>
+                <button id="tsp-auto" disabled>اجرای خودکار</button>
+                <button id="tsp-reset">شروع مجدد</button>
+
+                <p id="tsp-result"></p>
+                <p id="tsp-analysis"></p>
+
+            </div>
+
+            <!-- آزمایشگاه بلمن–فورد -->
+            <div id="bf-lab" hidden>
+
+                <h3>آزمایشگاه بلمن–فورد</h3>
+
+                <p>
+                    گراف جهت‌دار را با فهرست یال‌ها وارد کن. هر یال به شکل
+                    «مبدأ مقصد وزن» نوشته می‌شود و یال‌ها با ویرگول از هم جدا
+                    می‌شوند (حداکثر ۸ رأس و ۲۰ یال؛ وزن می‌تواند منفی باشد).
+                    یال‌های سبزِ باریک، بهترین مسیر فعلی به هر رأس را نشان می‌دهند
+                    و عدد زیر هر رأس، فاصله‌ی فعلی آن از مبدأ است.
+                </p>
+
+                <label for="bf-input">یال‌ها:</label>
+
+                <input
+                    type="text"
+                    id="bf-input"
+                    dir="ltr"
+                    value="1 2 6, 1 4 7, 2 3 5, 2 4 8, 2 5 -4, 3 2 -2, 4 3 -3, 4 5 9, 5 3 7, 5 1 2"
+                    placeholder="مثلاً 1 2 6, 1 3 7, 2 3 -2"
+                >
+
+                <label for="bf-source">رأس مبدأ:</label>
+
+                <input
+                    type="number"
+                    id="bf-source"
+                    value="1"
+                    min="1"
+                    max="8"
+                >
+
+                <button id="bf-start">شروع الگوریتم</button>
+                <button id="bf-sample-neg">نمونه با چرخه منفی</button>
+
+                <hr>
+
+                <h3>وضعیت گراف</h3>
+
+                <ul class="legend">
+                    <li><span class="num-box is-start"></span> رأس مبدأ</li>
+                    <li><span class="num-box is-shifted"></span> رأس قابل‌دسترسی</li>
+                    <li><span class="num-box is-unsorted"></span> هنوز ناپیدا (∞)</li>
+                    <li><span class="num-box is-final"></span> بهبود تازه (یال یا رأس)</li>
+                    <li><span class="num-box is-skip"></span> یال بررسی‌شده بدون بهبود</li>
+                    <li><span class="num-box is-compare"></span> یال در دور بررسی چرخه منفی</li>
+                    <li><span class="num-box is-best"></span> یال چرخه منفی</li>
+                </ul>
+
+                <div id="bf-display" class="tsp-display"></div>
+
+                <p id="bf-step">هنوز الگوریتم شروع نشده است.</p>
+
+                <button id="bf-prev" disabled>مرحله قبل</button>
+                <button id="bf-next" disabled>مرحله بعد</button>
+                <button id="bf-auto" disabled>اجرای خودکار</button>
+                <button id="bf-reset">شروع مجدد</button>
+
+                <p id="bf-result"></p>
+                <p id="bf-analysis"></p>
+
+            </div>
+
+            <!-- آزمایشگاه کوله‌پشتی صفر و یک -->
+            <div id="kp-lab" hidden>
+
+                <h3>آزمایشگاه کوله‌پشتی صفر و یک</h3>
+
+                <p>
+                    اقلام را به شکل «وزن ارزش» بنویس و با ویرگول از هم جدا کن
+                    (حداکثر ۷ قلم)، سپس ظرفیت کوله‌پشتی را وارد کن (حداکثر ۱۵).
+                    هر قلم یا کامل برداشته می‌شود یا اصلاً برداشته نمی‌شود.
+                    جدول برنامه‌ریزی پویا خانه‌به‌خانه پر می‌شود: هر خانه، بیشترین
+                    ارزشِ ممکن با چند قلم اول و ظرفیتِ همان ستون است.
+                </p>
+
+                <label for="kp-input">اقلام (وزن ارزش):</label>
+
+                <input
+                    type="text"
+                    id="kp-input"
+                    dir="ltr"
+                    value="1 1, 3 4, 4 5, 5 7"
+                    placeholder="مثلاً 2 3, 3 4, 4 5"
+                >
+
+                <label for="kp-capacity">ظرفیت:</label>
+
+                <input
+                    type="number"
+                    id="kp-capacity"
+                    value="7"
+                    min="1"
+                    max="15"
+                >
+
+                <button id="kp-start">شروع الگوریتم</button>
+
+                <hr>
+
+                <h3>وضعیت جدول</h3>
+
+                <ul class="legend">
+                    <li><span class="num-box is-start"></span> خانه‌ی در حال محاسبه</li>
+                    <li><span class="num-box is-small"></span> گزینه‌ی «برنداشتن قلم»</li>
+                    <li><span class="num-box is-large"></span> گزینه‌ی «برداشتن قلم»</li>
+                    <li><span class="num-box is-final"></span> مسیر انتخاب نهایی</li>
+                    <li><span class="num-box is-unsorted"></span> هنوز محاسبه نشده</li>
+                </ul>
+
+                <div id="kp-display" class="kp-wrap"></div>
+
+                <p id="kp-step">هنوز الگوریتم شروع نشده است.</p>
+
+                <button id="kp-prev" disabled>مرحله قبل</button>
+                <button id="kp-next" disabled>مرحله بعد</button>
+                <button id="kp-auto" disabled>اجرای خودکار</button>
+                <button id="kp-reset">شروع مجدد</button>
+
+                <p id="kp-result"></p>
+                <p id="kp-analysis"></p>
+
+            </div>
+
+
+
+            <!-- آزمایشگاه کدگذاری هافمن -->
+            <div id="hf-lab" hidden>
+                <h3>آزمایشگاه کدگذاری هافمن</h3>
+                <p>نمادها و فراوانی‌ها را به شکل «A:5, B:2, C:1» وارد کن (۲ تا ۱۲ نماد، با فراوانی مثبت).</p>
+                <label for="hf-input">نمادها و فراوانی‌ها:</label>
+                <input type="text" id="hf-input" dir="ltr" value="A:5, B:9, C:12, D:13, E:16, F:45" placeholder="A:5, B:2, C:1">
+                <button id="hf-start">ساخت درخت هافمن</button>
+                <hr>
+                <h3>ساخت درخت مرحله‌به‌مرحله</h3>
+                <ul class="legend">
+                    <li><span class="num-box is-key"></span> دو گره انتخاب‌شده</li>
+                    <li><span class="num-box is-small"></span> نماد / برگ</li>
+                    <li><span class="num-box is-final"></span> گره ادغام‌شده</li>
+                </ul>
+                <div id="hf-forest" class="hf-forest"></div>
+                <p id="hf-step">هنوز الگوریتم شروع نشده است.</p>
+                <button id="hf-prev" disabled>مرحله قبل</button>
+                <button id="hf-next" disabled>مرحله بعد</button>
+                <button id="hf-auto" disabled>اجرای خودکار</button>
+                <button id="hf-reset">شروع مجدد</button>
+                <div id="hf-codes"></div>
+                <p id="hf-result"></p>
+                <p id="hf-analysis"></p>
+            </div>
+
+            <button id="back-button">بازگشت به فهرست</button>
+
+        </section>
+    </main>
+
+    <footer>
+        <p><strong>AlgoVerse</strong> <span>·</span> یادگیری، اجرا و تحلیل الگوریتم‌ها</p>
+    </footer>
+
+    <script>
+
+// ================================
+// تم روشن / تیره
+// ================================
+const themeToggle = document.getElementById("theme-toggle");
+const savedTheme = (() => {
+    try { return localStorage.getItem("algovese-theme"); } catch (error) { return null; }
+})();
+function applyTheme(theme) {
+    document.documentElement.dataset.theme = theme;
+    if (themeToggle) {
+        const dark = theme === "dark";
+        themeToggle.innerHTML = dark ? '☀ <span>حالت روشن</span>' : '☾ <span>حالت تیره</span>';
+        themeToggle.setAttribute("aria-pressed", String(dark));
+        themeToggle.setAttribute("aria-label", dark ? "فعال‌کردن تم روشن" : "فعال‌کردن تم تیره");
+    }
+    try { localStorage.setItem("algovese-theme", theme); } catch (error) { /* ذخیره‌سازی اختیاری است */ }
+}
+applyTheme(savedTheme === "dark" ? "dark" : "light");
+if (themeToggle) {
+    themeToggle.addEventListener("click", () => {
+        applyTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark");
+    });
+}
+
+// ================================
+// 1. اطلاعات الگوریتم‌ها
+// ================================
+
+const algorithms = [
+    {
+        name: "مرتب‌سازی درجی (Insertion Sort)",
+        description: "عناصر را یکی‌یکی بررسی می‌کند و هر عنصر را در جای مناسبش میان عناصر مرتب‌شده قرار می‌دهد."
+    },
+    {
+        name: "مرتب‌سازی سریع (Quick Sort)",
+        description: "یک عنصر را به‌عنوان محور (Pivot) انتخاب می‌کند، بقیه را به دو گروه کوچک‌تر و بزرگ‌تر از محور تقسیم می‌کند و همین کار را به‌صورت بازگشتی روی هر گروه تکرار می‌کند. میانگین پیچیدگی زمانی آن O(n log n) و بدترین حالت آن O(n²) است."
+    },
+    {
+        name: "فروشنده دوره‌گرد (Traveling Salesperson)",
+        description: "هدف، یافتن کوتاه‌ترین دوری است که از شهرها عبور کند و به شهر شروع برگردد."
+    },
+    {
+        name: "بلمن–فورد (Bellman–Ford)",
+        description: "کوتاه‌ترین مسیرها را از یک رأس مبدأ در گراف محاسبه می‌کند و چرخه منفی قابل‌دسترسی را تشخیص می‌دهد."
+    },
+    {
+        name: "کوله‌پشتی صفر و یک (0/1 Knapsack)",
+        description: "اقلامی را انتخاب می‌کند که با رعایت ظرفیت کوله‌پشتی، بیشترین ارزش را داشته باشند."
+    },
+    {
+        name: "کدگذاری هافمن (Huffman Coding)",
+        description: "با استفاده از فراوانی نمادها، کدهای دودویی با طول متغیر تولید می‌کند."
+    }
+];
+
+
+// ================================
+// 2. اتصال به عناصر HTML
+// ================================
+
+const buttons = document.querySelectorAll(".algorithm-card button");
+
+const details = document.getElementById("algorithm-details");
+const title = document.getElementById("algorithm-title");
+const description = document.getElementById("algorithm-description");
+const backButton = document.getElementById("back-button");
+
+const insertionLab = document.getElementById("insertion-lab");
+const quickLab = document.getElementById("quick-lab");
+
+// --- Insertion Sort ---
+const numbersInput = document.getElementById("numbers-input");
+const startButton = document.getElementById("start-sort");
+const numbersDisplay = document.getElementById("numbers-display");
+const stepDescription = document.getElementById("step-description");
+const previousButton = document.getElementById("previous-step");
+const nextButton = document.getElementById("next-step");
+const autoButton = document.getElementById("auto-sort");
+const resetButton = document.getElementById("reset-sort");
+const resultDisplay = document.getElementById("sort-result");
+const analysisDisplay = document.getElementById("sort-analysis");
+
+// --- Quick Sort ---
+const qsInput = document.getElementById("qs-input");
+const qsStart = document.getElementById("qs-start");
+const qsDisplay = document.getElementById("qs-display");
+const qsStepText = document.getElementById("qs-step");
+const qsPrev = document.getElementById("qs-prev");
+const qsNext = document.getElementById("qs-next");
+const qsAuto = document.getElementById("qs-auto");
+const qsReset = document.getElementById("qs-reset");
+const qsResult = document.getElementById("qs-result");
+const qsAnalysis = document.getElementById("qs-analysis");
+
+// --- Traveling Salesperson ---
+const tspLab = document.getElementById("tsp-lab");
+const tspInput = document.getElementById("tsp-input");
+const tspStart = document.getElementById("tsp-start");
+const tspDisplay = document.getElementById("tsp-display");
+const tspStepText = document.getElementById("tsp-step");
+const tspPrev = document.getElementById("tsp-prev");
+const tspNext = document.getElementById("tsp-next");
+const tspAuto = document.getElementById("tsp-auto");
+const tspReset = document.getElementById("tsp-reset");
+const tspResult = document.getElementById("tsp-result");
+const tspAnalysis = document.getElementById("tsp-analysis");
+
+// --- Bellman-Ford ---
+const bfLab = document.getElementById("bf-lab");
+const bfInput = document.getElementById("bf-input");
+const bfSource = document.getElementById("bf-source");
+const bfStart = document.getElementById("bf-start");
+const bfSampleNeg = document.getElementById("bf-sample-neg");
+const bfDisplay = document.getElementById("bf-display");
+const bfStepText = document.getElementById("bf-step");
+const bfPrev = document.getElementById("bf-prev");
+const bfNext = document.getElementById("bf-next");
+const bfAuto = document.getElementById("bf-auto");
+const bfReset = document.getElementById("bf-reset");
+const bfResult = document.getElementById("bf-result");
+const bfAnalysis = document.getElementById("bf-analysis");
+
+// --- 0/1 Knapsack ---
+const kpLab = document.getElementById("kp-lab");
+const kpInput = document.getElementById("kp-input");
+const kpCapacity = document.getElementById("kp-capacity");
+const kpStart = document.getElementById("kp-start");
+const kpDisplay = document.getElementById("kp-display");
+const kpStepText = document.getElementById("kp-step");
+const kpPrev = document.getElementById("kp-prev");
+const kpNext = document.getElementById("kp-next");
+const kpAuto = document.getElementById("kp-auto");
+const kpReset = document.getElementById("kp-reset");
+const kpResult = document.getElementById("kp-result");
+const kpAnalysis = document.getElementById("kp-analysis");
+
+// --- Huffman Coding ---
+const hfLab = document.getElementById("hf-lab");
+const hfInput = document.getElementById("hf-input");
+const hfStart = document.getElementById("hf-start");
+const hfForest = document.getElementById("hf-forest");
+const hfStepText = document.getElementById("hf-step");
+const hfPrev = document.getElementById("hf-prev");
+const hfNext = document.getElementById("hf-next");
+const hfAuto = document.getElementById("hf-auto");
+const hfReset = document.getElementById("hf-reset");
+const hfCodes = document.getElementById("hf-codes");
+const hfResult = document.getElementById("hf-result");
+const hfAnalysis = document.getElementById("hf-analysis");
+
+
+// ================================
+// 3. ابزارهای مشترک
+// ================================
+
+// ورودی را به آرایه عدد تبدیل می‌کند (ارقام فارسی و عربی هم پذیرفته می‌شوند)
+function parseNumbers(rawInput, maxCount) {
+
+    const trimmed = rawInput.trim();
+
+    if (trimmed === "") {
+        alert("لطفاً چند عدد وارد کن.");
+        return null;
+    }
+
+    const normalized = trimmed
+        .replace(/[۰-۹]/g, function(d) { return "۰۱۲۳۴۵۶۷۸۹".indexOf(d); })
+        .replace(/[٠-٩]/g, function(d) { return "٠١٢٣٤٥٦٧٨٩".indexOf(d); });
+
+    const parts = normalized.split(/[,\s،]+/).filter(Boolean);
+    const numbers = parts.map(Number);
+
+    if (
+        numbers.length === 0 ||
+        numbers.length > maxCount ||
+        numbers.some(function(n) { return !Number.isFinite(n); })
+    ) {
+        alert(`ورودی نامعتبر است. حداکثر ${maxCount} عدد معتبر وارد کن.`);
+        return null;
+    }
+
+    return numbers;
+}
+
+// جعبه‌های عدد را با کلاس‌های وضعیت رسم می‌کند
+function drawBoxes(container, array, classesFor) {
+
+    container.replaceChildren();
+
+    array.forEach(function(value, index) {
+        const box = document.createElement("span");
+        box.className = "num-box " + classesFor(index).join(" ");
+        box.textContent = value;
+        container.appendChild(box);
+    });
+}
+
+// «برچسب فارسی + اعداد چپ‌به‌راست» را در یک عنصر می‌نویسد
+function setResult(element, numbers) {
+
+    element.replaceChildren();
+
+    const numbersText = document.createElement("bdi");
+    numbersText.dir = "ltr";
+    numbersText.textContent = numbers.join(", ");
+
+    element.append(document.createTextNode("نتیجه نهایی: "), numbersText);
+}
+
+// کنترل مراحل (قبلی / بعدی / خودکار / ریست) که برای هر آزمایشگاه جداگانه ساخته می‌شود
+function createStepper(controls, render, onClear) {
+
+    let steps = [];
+    let current = 0;
+    let timer = null;
+
+    function stop() {
+        if (timer !== null) {
+            clearInterval(timer);
+            timer = null;
+        }
+        controls.auto.textContent = "اجرای خودکار";
+    }
+
+    function show() {
+        if (steps.length === 0) {
+            return;
+        }
+        controls.prev.disabled = current === 0;
+        controls.next.disabled = current === steps.length - 1;
+        render(steps[current], current, steps.length);
+    }
+
+    function load(newSteps) {
+        stop();
+        steps = newSteps;
+        current = 0;
+        controls.auto.disabled = steps.length <= 1;
+        show();
+    }
+
+    function clear() {
+        stop();
+        steps = [];
+        current = 0;
+        controls.prev.disabled = true;
+        controls.next.disabled = true;
+        controls.auto.disabled = true;
+        onClear();
+    }
+
+    controls.next.addEventListener("click", function() {
+        stop();
+        if (current < steps.length - 1) {
+            current++;
+            show();
+        }
+    });
+
+    controls.prev.addEventListener("click", function() {
+        stop();
+        if (current > 0) {
+            current--;
+            show();
+        }
+    });
+
+    controls.auto.addEventListener("click", function() {
+
+        if (steps.length === 0) {
+            return;
+        }
+
+        if (timer !== null) {
+            stop();
+            return;
+        }
+
+        if (current === steps.length - 1) {
+            current = 0;
+            show();
+        }
+
+        controls.auto.textContent = "توقف";
+
+        timer = setInterval(function() {
+            if (current < steps.length - 1) {
+                current++;
+                show();
+            } else {
+                stop();
+            }
+        }, 800);
+    });
+
+    controls.reset.addEventListener("click", clear);
+
+    return { load: load, stop: stop, clear: clear };
+}
+
+
+// ================================
+// 4. مرتب‌سازی درجی
+// ================================
+
+function generateInsertionSortSteps(numbers) {
+
+    const array = [...numbers];
+    const history = [];
+
+    let comparisons = 0;
+    let shifts = 0;
+
+    history.push({
+        array: [...array],
+        keyIndex: null,
+        shiftedFrom: null,
+        sortedEnd: 0,
+        placed: false,
+        description: "وضعیت اولیه اعداد",
+        comparisons: comparisons,
+        shifts: shifts
+    });
+
+    for (let i = 1; i < array.length; i++) {
+
+        const key = array[i];
+        let j = i - 1;
+
+        while (j >= 0) {
+
+            comparisons++;
+
+            if (array[j] > key) {
+
+                array[j + 1] = array[j];
+                shifts++;
+
+                // key را در خانه خالی‌شده نشان می‌دهیم تا عدد ناپدید نشود
+                const view = [...array];
+                view[j] = key;
+
+                history.push({
+                    array: view,
+                    keyIndex: j,
+                    shiftedFrom: j + 1,
+                    sortedEnd: i,
+                    placed: false,
+                    description: `عدد ${key} در حال حرکت به سمت جای مناسب است.`,
+                    comparisons: comparisons,
+                    shifts: shifts
+                });
+
+                j--;
+
+            } else {
+                break;
+            }
+        }
+
+        array[j + 1] = key;
+
+        history.push({
+            array: [...array],
+            keyIndex: j + 1,
+            shiftedFrom: null,
+            sortedEnd: i,
+            placed: true,
+            description: `عدد ${key} در جای مناسب قرار گرفت.`,
+            comparisons: comparisons,
+            shifts: shifts
+        });
+    }
+
+    history.push({
+        array: [...array],
+        keyIndex: null,
+        shiftedFrom: null,
+        sortedEnd: array.length - 1,
+        placed: false,
+        description: "مرتب‌سازی با موفقیت تمام شد!",
+        comparisons: comparisons,
+        shifts: shifts
+    });
+
+    return history;
+}
+
+function renderInsertionStep(step, index, total) {
+
+    drawBoxes(numbersDisplay, step.array, function(k) {
+
+        if (k === step.keyIndex) {
+            return [step.placed ? "is-placed" : "is-key"];
+        }
+
+        if (step.shiftedFrom !== null && k >= step.shiftedFrom && k <= step.sortedEnd) {
+            return ["is-shifted"];
+        }
+
+        if (k <= step.sortedEnd) {
+            return ["is-sorted"];
+        }
+
+        return ["is-unsorted"];
+    });
+
+    stepDescription.textContent =
+        `مرحله ${index + 1} از ${total}: ${step.description}`;
+
+    if (index === total - 1) {
+
+        setResult(resultDisplay, step.array);
+
+        analysisDisplay.textContent =
+            `تعداد مقایسه‌ها: ${step.comparisons} | ` +
+            `تعداد جابه‌جایی‌ها: ${step.shifts} | ` +
+            `پیچیدگی زمانی: بهترین حالت O(n)، میانگین و بدترین حالت O(n²).`;
+
+    } else {
+        resultDisplay.textContent = "";
+        analysisDisplay.textContent = "";
+    }
+}
+
+const insertionStepper = createStepper(
+    { prev: previousButton, next: nextButton, auto: autoButton, reset: resetButton },
+    renderInsertionStep,
+    function() {
+        numbersDisplay.replaceChildren();
+        stepDescription.textContent = "هنوز مرتب‌سازی شروع نشده است.";
+        resultDisplay.textContent = "";
+        analysisDisplay.textContent = "";
+    }
+);
+
+startButton.addEventListener("click", function() {
+
+    insertionStepper.stop();
+
+    const numbers = parseNumbers(numbersInput.value, 100);
+
+    if (numbers === null) {
+        return;
+    }
+
+    insertionStepper.load(generateInsertionSortSteps(numbers));
+});
+
+
+// ================================
+// 5. مرتب‌سازی سریع (Quick Sort)
+// ================================
+
+// از روش Lomuto استفاده می‌کند: آخرین عنصر هر بازه به‌عنوان محور انتخاب می‌شود.
+function generateQuickSortSteps(numbers) {
+
+    const array = [...numbers];
+    const history = [];
+    const done = new Set();   // خانه‌هایی که در جای نهایی خود هستند
+
+    let comparisons = 0;
+    let swaps = 0;
+
+    function snap(text, info) {
+        const extra = info || {};
+        history.push({
+            array: [...array],
+            low: extra.low === undefined ? null : extra.low,
+            high: extra.high === undefined ? null : extra.high,
+            pivot: extra.pivot === undefined ? null : extra.pivot,
+            i: extra.i === undefined ? null : extra.i,
+            j: extra.j === undefined ? null : extra.j,
+            sorted: [...done],
+            description: text,
+            comparisons: comparisons,
+            swaps: swaps
+        });
+    }
+
+    function swap(a, b) {
+        if (a !== b) {
+            const temp = array[a];
+            array[a] = array[b];
+            array[b] = temp;
+            swaps++;
+        }
+    }
+
+    function partition(low, high) {
+
+        const pivotValue = array[high];
+        let i = low - 1;
+
+        snap(
+            `بازه ${low + 1} تا ${high + 1}: عدد ${pivotValue} (آخرین عنصر بازه) به‌عنوان محور انتخاب شد.`,
+            { low: low, high: high, pivot: high, i: i }
+        );
+
+        for (let j = low; j < high; j++) {
+
+            comparisons++;
+
+            snap(
+                `مقایسه ${array[j]} با محور ${pivotValue}`,
+                { low: low, high: high, pivot: high, i: i, j: j }
+            );
+
+            if (array[j] < pivotValue) {
+
+                i++;
+                const moved = i !== j;
+                swap(i, j);
+
+                snap(
+                    moved
+                        ? `${array[i]} از محور کوچک‌تر است و به گروه کوچک‌ترها منتقل شد.`
+                        : `${array[i]} از محور کوچک‌تر است و در گروه کوچک‌ترها می‌ماند.`,
+                    { low: low, high: high, pivot: high, i: i, j: j }
+                );
+
+            } else {
+
+                snap(
+                    `${array[j]} از محور بزرگ‌تر یا مساوی آن است و در گروه بزرگ‌ترها می‌ماند.`,
+                    { low: low, high: high, pivot: high, i: i, j: j }
+                );
+            }
+        }
+
+        swap(i + 1, high);
+        done.add(i + 1);
+
+        snap(
+            `محور ${pivotValue} بین دو گروه قرار گرفت و در جای نهایی خود است.`,
+            { low: low, high: high, pivot: i + 1 }
+        );
+
+        return i + 1;
+    }
+
+    function sort(low, high) {
+
+        if (low > high) {
+            return;
+        }
+
+        if (low === high) {
+            done.add(low);
+            snap(
+                `عدد ${array[low]} تنها عنصر بازه است و در جای نهایی خود قرار دارد.`,
+                { low: low, high: high }
+            );
+            return;
+        }
+
+        const p = partition(low, high);
+
+        sort(low, p - 1);
+        sort(p + 1, high);
+    }
+
+    snap("وضعیت اولیه اعداد");
+    sort(0, array.length - 1);
+    snap("مرتب‌سازی با موفقیت تمام شد!");
+
+    return history;
+}
+
+function renderQuickStep(step, index, total) {
+
+    drawBoxes(qsDisplay, step.array, function(k) {
+
+        const classes = [];
+        const hasRange = step.low !== null;
+
+        if (step.sorted.includes(k)) {
+            classes.push("is-sorted");
+        } else if (k === step.pivot) {
+            classes.push("is-pivot");
+        } else if (k === step.j) {
+            classes.push("is-compare");
+        } else if (step.i !== null && k >= step.low && k <= step.i) {
+            classes.push("is-small");
+        } else if (step.j !== null && k > step.i && k < step.j) {
+            classes.push("is-large");
+        }
+
+        if (hasRange && (k < step.low || k > step.high) && !step.sorted.includes(k)) {
+            classes.push("is-dim");
+        }
+
+        return classes;
+    });
+
+    qsStepText.textContent =
+        `مرحله ${index + 1} از ${total}: ${step.description}`;
+
+    if (index === total - 1) {
+
+        setResult(qsResult, step.array);
+
+        qsAnalysis.textContent =
+            `تعداد مقایسه‌ها: ${step.comparisons} | ` +
+            `تعداد جابه‌جایی‌ها: ${step.swaps} | ` +
+            `پیچیدگی زمانی: بهترین و میانگین O(n log n)، بدترین حالت O(n²) ` +
+            `(مثلاً وقتی ورودی از قبل مرتب است و محور همیشه آخرین عنصر است).`;
+
+    } else {
+        qsResult.textContent = "";
+        qsAnalysis.textContent = "";
+    }
+}
+
+const quickStepper = createStepper(
+    { prev: qsPrev, next: qsNext, auto: qsAuto, reset: qsReset },
+    renderQuickStep,
+    function() {
+        qsDisplay.replaceChildren();
+        qsStepText.textContent = "هنوز مرتب‌سازی شروع نشده است.";
+        qsResult.textContent = "";
+        qsAnalysis.textContent = "";
+    }
+);
+
+qsStart.addEventListener("click", function() {
+
+    quickStepper.stop();
+
+    // بدترین حالت Quick Sort تعداد مراحل زیادی دارد، پس حداکثر ۳۰ عدد
+    const numbers = parseNumbers(qsInput.value, 30);
+
+    if (numbers === null) {
+        return;
+    }
+
+    quickStepper.load(generateQuickSortSteps(numbers));
+});
+
+
+// ================================
+// 6. فروشنده دوره‌گرد (Traveling Salesperson)
+// ================================
+
+const SVG_NS = "http://www.w3.org/2000/svg";
+const MAP_WIDTH = 600;
+const MAP_HEIGHT = 380;
+
+// شهرها را تصادفی روی نقشه می‌سازد (با فاصله‌ی حداقلی از هم و از لبه‌ها)
+function generateCities(count) {
+
+    const cities = [];
+    const margin = 40;
+    const minGap = 60;
+    let attempts = 0;
+
+    while (cities.length < count) {
+
+        const candidate = {
+            x: margin + Math.random() * (MAP_WIDTH - 2 * margin),
+            y: margin + Math.random() * (MAP_HEIGHT - 2 * margin)
+        };
+
+        attempts++;
+
+        // اگر جا تنگ بود، بعد از چند تلاش فاصله‌ی حداقلی را نادیده می‌گیریم
+        const farEnough = cities.every(function(c) {
+            return Math.hypot(c.x - candidate.x, c.y - candidate.y) >= minGap;
+        });
+
+        if (farEnough || attempts > 500) {
+            cities.push(candidate);
+        }
+    }
+
+    return cities;
+}
+
+function distance(a, b) {
+    return Math.hypot(a.x - b.x, a.y - b.y);
+}
+
+// طول یک دور کامل (با برگشت به شهر شروع)
+function tourLength(cities, order) {
+
+    let total = 0;
+
+    for (let k = 0; k < order.length; k++) {
+        const from = cities[order[k]];
+        const to = cities[order[(k + 1) % order.length]];
+        total += distance(from, to);
+    }
+
+    return total;
+}
+
+// «ترتیب شهرها» را به‌صورت متن چپ‌به‌راست مثل 1 → 3 → 2 → 1 برمی‌گرداند
+function routeText(order) {
+    const names = order.map(function(c) { return c + 1; });
+    names.push(order[0] + 1);
+    return names.join(" → ");
+}
+
+// الگوریتم: جست‌وجوی کامل (Brute Force)
+// شهر ۱ ثابت است و همه جایگشت‌های بقیه شهرها یکی‌یکی امتحان می‌شوند.
+// فقط لحظه‌هایی که دور کوتاه‌تری پیدا شود به‌عنوان «مرحله» ثبت می‌شود.
+function generateTspSteps(cities) {
+
+    const n = cities.length;
+    const history = [];
+
+    let best = Infinity;
+    let bestOrder = null;
+    let checked = 0;
+
+    history.push({
+        cities: cities,
+        order: null,
+        length: null,
+        final: false,
+        description: `${n} شهر روی نقشه ساخته شد. شهر ۱ نقطه شروع است.`,
+        checked: 0
+    });
+
+    const order = [0];
+    const used = new Array(n).fill(false);
+    used[0] = true;
+
+    function search() {
+
+        if (order.length === n) {
+
+            checked++;
+
+            const length = tourLength(cities, order);
+
+            if (length < best) {
+                best = length;
+                bestOrder = [...order];
+
+                history.push({
+                    cities: cities,
+                    order: [...order],
+                    length: length,
+                    final: false,
+                    description: `دور کوتاه‌تری پیدا شد.`,
+                    checked: checked
+                });
+            }
+
+            return;
+        }
+
+        for (let city = 1; city < n; city++) {
+
+            if (used[city]) {
+                continue;
+            }
+
+            used[city] = true;
+            order.push(city);
+
+            search();
+
+            order.pop();
+            used[city] = false;
+        }
+    }
+
+    search();
+
+    history.push({
+        cities: cities,
+        order: bestOrder,
+        length: best,
+        final: true,
+        description: "همه دورها بررسی شد و کوتاه‌ترین دور پیدا شد!",
+        checked: checked
+    });
+
+    return history;
+}
+
+function svgElement(tag, attributes) {
+
+    const element = document.createElementNS(SVG_NS, tag);
+
+    Object.keys(attributes).forEach(function(name) {
+        element.setAttribute(name, attributes[name]);
+    });
+
+    return element;
+}
+
+function drawTspMap(step) {
+
+    const svg = svgElement("svg", {
+        viewBox: "0 0 " + MAP_WIDTH + " " + MAP_HEIGHT,
+        role: "img",
+        "aria-label": "نقشه شهرها و دور فروشنده دوره‌گرد"
+    });
+
+    // مسیر (اگر وجود داشته باشد)
+    if (step.order !== null) {
+
+        const points = step.order
+            .concat(step.order[0])
+            .map(function(c) { return step.cities[c].x + "," + step.cities[c].y; })
+            .join(" ");
+
+        svg.appendChild(svgElement("polyline", {
+            points: points,
+            class: step.final ? "tsp-edge is-final" : "tsp-edge"
+        }));
+    }
+
+    // شهرها
+    step.cities.forEach(function(city, index) {
+
+        svg.appendChild(svgElement("circle", {
+            cx: city.x,
+            cy: city.y,
+            r: 18,
+            class: index === 0 ? "tsp-city is-start" : "tsp-city"
+        }));
+
+        const label = svgElement("text", {
+            x: city.x,
+            y: city.y,
+            class: "tsp-label"
+        });
+        label.textContent = index + 1;
+        svg.appendChild(label);
+    });
+
+    tspDisplay.replaceChildren(svg);
+}
+
+function renderTspStep(step, index, total) {
+
+    drawTspMap(step);
+
+    tspStepText.replaceChildren();
+    tspStepText.append(document.createTextNode(
+        `مرحله ${index + 1} از ${total}: ${step.description}`
+    ));
+
+    if (step.order !== null) {
+
+        const route = document.createElement("bdi");
+        route.dir = "ltr";
+        route.textContent = routeText(step.order);
+
+        tspStepText.append(
+            document.createTextNode(` مسیر: `),
+            route,
+            document.createTextNode(` | طول: ${Math.round(step.length)}`)
+        );
+    }
+
+    if (index === total - 1) {
+
+        tspResult.replaceChildren();
+
+        const route = document.createElement("bdi");
+        route.dir = "ltr";
+        route.textContent = routeText(step.order);
+
+        tspResult.append(
+            document.createTextNode("کوتاه‌ترین دور: "),
+            route,
+            document.createTextNode(` (طول ${Math.round(step.length)})`)
+        );
+
+        tspAnalysis.textContent =
+            `تعداد دورهای بررسی‌شده: ${step.checked} | ` +
+            `پیچیدگی زمانی: O(n!) ← برای n شهر، (n−1)! دور امتحان می‌شود. ` +
+            `روش برنامه‌نویسی پویا (هلد–کارپ) آن را به O(n²·2ⁿ) کاهش می‌دهد.`;
+
+    } else {
+        tspResult.textContent = "";
+        tspAnalysis.textContent = "";
+    }
+}
+
+const tspStepper = createStepper(
+    { prev: tspPrev, next: tspNext, auto: tspAuto, reset: tspReset },
+    renderTspStep,
+    function() {
+        tspDisplay.replaceChildren();
+        tspStepText.textContent = "هنوز جست‌وجو شروع نشده است.";
+        tspResult.textContent = "";
+        tspAnalysis.textContent = "";
+    }
+);
+
+tspStart.addEventListener("click", function() {
+
+    tspStepper.stop();
+
+    const count = Number(tspInput.value);
+
+    if (!Number.isInteger(count) || count < 3 || count > 9) {
+        alert("تعداد شهرها باید یک عدد صحیح بین ۳ تا ۹ باشد.");
+        return;
+    }
+
+    tspStepper.load(generateTspSteps(generateCities(count)));
+});
+
+
+// ================================
+// 7. بلمن–فورد (Bellman–Ford)
+// ================================
+
+const BF_MAX_VERTICES = 8;
+const BF_MAX_EDGES = 20;
+
+// رنگ یال‌ها و نوک پیکان‌ها (هماهنگ با پالت پاستلی)
+const BF_COLORS = {
+    base: "#cbbfe6",
+    tree: "#4fb97f",
+    good: "#4fb97f",
+    skip: "#8f73d4",
+    current: "#ecc94b",
+    bad: "#e8699f"
+};
+
+// عددها و عبارت‌های ریاضی را در متن راست‌به‌چپ چپ‌به‌راست نگه می‌دارد
+// (وگرنه عدد منفی مثل -4 به‌صورت «4-» دیده می‌شود)
+function ltr(text) {
+    return "⁦" + text + "⁩";
+}
+
+function formatDistance(value) {
+    return value === Infinity ? "∞" : String(value);
+}
+
+function num(value) {
+    return ltr(formatDistance(value));
+}
+
+// «1 2 6, 1 3 -2» را به فهرست یال‌ها تبدیل می‌کند: هر یال = مبدأ، مقصد، وزن
+function parseEdges(rawInput) {
+
+    const normalized = rawInput
+        .replace(/[۰-۹]/g, function(d) { return "۰۱۲۳۴۵۶۷۸۹".indexOf(d); })
+        .replace(/[٠-٩]/g, function(d) { return "٠١٢٣٤٥٦٧٨٩".indexOf(d); })
+        .replace(/[−–—]/g, "-");
+
+    const parts = normalized
+        .split(/[,،;\n]+/)
+        .map(function(part) { return part.trim(); })
+        .filter(Boolean);
+
+    if (parts.length === 0) {
+        alert("لطفاً حداقل یک یال وارد کن. مثلاً: 1 2 5");
+        return null;
+    }
+
+    if (parts.length > BF_MAX_EDGES) {
+        alert(`حداکثر ${BF_MAX_EDGES} یال مجاز است.`);
+        return null;
+    }
+
+    const edges = [];
+    let vertexCount = 0;
+
+    for (const part of parts) {
+
+        const tokens = part.split(/\s+/);
+        const values = tokens.map(Number);
+
+        if (tokens.length !== 3 || values.some(function(v) { return !Number.isInteger(v); })) {
+            alert(`یال «${part}» معتبر نیست. هر یال باید به شکل «مبدأ مقصد وزن» باشد، مثلاً 1 2 5.`);
+            return null;
+        }
+
+        const from = values[0];
+        const to = values[1];
+        const weight = values[2];
+
+        if (from < 1 || to < 1 || from > BF_MAX_VERTICES || to > BF_MAX_VERTICES) {
+            alert(`شماره رأس‌ها باید بین 1 تا ${BF_MAX_VERTICES} باشد (یال «${part}»).`);
+            return null;
+        }
+
+        if (from === to) {
+            alert(`یال «${part}» از یک رأس به خودش می‌رود و پشتیبانی نمی‌شود.`);
+            return null;
+        }
+
+        if (Math.abs(weight) > 999) {
+            alert(`وزن یال «${part}» باید بین -999 تا 999 باشد.`);
+            return null;
+        }
+
+        edges.push({ from: from - 1, to: to - 1, w: weight });
+        vertexCount = Math.max(vertexCount, from, to);
+    }
+
+    return { n: vertexCount, edges: edges };
+}
+
+// الگوریتم: n-1 دور، در هر دور همه یال‌ها «شل» (Relax) می‌شوند.
+// یک دور اضافه، چرخه منفی قابل‌دسترسی را تشخیص می‌دهد.
+function generateBellmanFordSteps(n, edges, source) {
+
+    const dist = new Array(n).fill(Infinity);
+    const parent = new Array(n).fill(-1);   // شماره یالی که آخرین بار فاصله‌ی هر رأس را بهتر کرد
+    const history = [];
+
+    let comparisons = 0;
+    let relaxations = 0;
+    let negativeCycle = false;
+
+    dist[source] = 0;
+
+    function snap(text, info) {
+        const extra = info || {};
+        history.push({
+            n: n,
+            edges: edges,
+            source: source,
+            dist: [...dist],
+            parent: [...parent],
+            edgeIndex: extra.edgeIndex === undefined ? null : extra.edgeIndex,
+            status: extra.status || "info",
+            updated: extra.updated === undefined ? null : extra.updated,
+            negativeCycle: negativeCycle,
+            final: extra.final === true,
+            description: text,
+            comparisons: comparisons,
+            relaxations: relaxations
+        });
+    }
+
+    // عبارت «فاصله مبدأ + وزن = مجموع» مثل 5 - 4 = 1
+    function sumText(edge) {
+        const sign = edge.w < 0 ? "-" : "+";
+        return ltr(`${dist[edge.from]} ${sign} ${Math.abs(edge.w)} = ${dist[edge.from] + edge.w}`);
+    }
+
+    snap(`رأس ${source + 1} مبدأ است: فاصله‌اش 0 و فاصله‌ی بقیه رأس‌ها ∞ شد.`);
+
+    let converged = false;
+
+    for (let pass = 1; pass <= n - 1 && !converged; pass++) {
+
+        let changed = false;
+
+        for (let i = 0; i < edges.length; i++) {
+
+            const edge = edges[i];
+            const label = `دور ${pass}، یال ${edge.from + 1} به ${edge.to + 1} (وزن ${num(edge.w)})`;
+
+            comparisons++;
+
+            if (dist[edge.from] === Infinity) {
+
+                snap(
+                    `${label}: رأس ${edge.from + 1} هنوز قابل‌دسترسی نیست (∞)، پس چیزی بهتر نمی‌شود.`,
+                    { edgeIndex: i, status: "skipped" }
+                );
+                continue;
+            }
+
+            const candidate = dist[edge.from] + edge.w;
+
+            if (candidate < dist[edge.to]) {
+
+                const old = dist[edge.to];
+                const text = sumText(edge);
+
+                dist[edge.to] = candidate;
+                parent[edge.to] = i;
+                relaxations++;
+                changed = true;
+
+                snap(
+                    `${label}: ${text} از فاصله‌ی قبلی ${num(old)} کمتر است؛ فاصله‌ی رأس ${edge.to + 1} شد ${num(candidate)}.`,
+                    { edgeIndex: i, status: "relaxed", updated: edge.to }
+                );
+
+            } else {
+
+                snap(
+                    `${label}: ${sumText(edge)} از فاصله‌ی فعلی ${num(dist[edge.to])} کمتر نیست؛ تغییری نمی‌کند.`,
+                    { edgeIndex: i, status: "skipped" }
+                );
+            }
+        }
+
+        if (!changed) {
+            converged = true;
+            snap(`در دور ${pass} هیچ فاصله‌ای تغییر نکرد؛ فاصله‌ها پایدار شدند و چرخه منفی وجود ندارد.`);
+        }
+    }
+
+    // دور اضافه: اگر هنوز بهبودی ممکن باشد، چرخه منفی وجود دارد
+    if (!converged) {
+
+        snap(`${n - 1} دور کامل شد. در دور آخر، اگر باز هم فاصله‌ای بهتر شود یعنی چرخه منفی وجود دارد.`);
+
+        for (let i = 0; i < edges.length; i++) {
+
+            const edge = edges[i];
+
+            comparisons++;
+
+            if (dist[edge.from] !== Infinity && dist[edge.from] + edge.w < dist[edge.to]) {
+
+                negativeCycle = true;
+
+                snap(
+                    `یال ${edge.from + 1} به ${edge.to + 1}: ${sumText(edge)} هنوز از ${num(dist[edge.to])} کمتر است؛ پس چرخه منفی وجود دارد!`,
+                    { edgeIndex: i, status: "negcycle" }
+                );
+                break;
+            }
+
+            snap(
+                `بررسی یال ${edge.from + 1} به ${edge.to + 1}: بهبودی ندارد.`,
+                { edgeIndex: i, status: "checked" }
+            );
+        }
+    }
+
+    snap(
+        negativeCycle
+            ? "چرخه منفی قابل‌دسترسی از مبدأ پیدا شد؛ برای رأس‌های تحت‌تأثیر آن، کوتاه‌ترین مسیر وجود ندارد."
+            : "الگوریتم تمام شد؛ فاصله‌ی نهایی همه رأس‌ها از مبدأ مشخص است.",
+        { final: true }
+    );
+
+    return history;
+}
+
+function bfEdgeState(step, index) {
+
+    if (step.edgeIndex === index) {
+
+        if (step.status === "relaxed") {
+            return "good";
+        }
+        if (step.status === "skipped") {
+            return "skip";
+        }
+        if (step.status === "negcycle") {
+            return "bad";
+        }
+        return "current";
+    }
+
+    return step.parent.includes(index) ? "tree" : "base";
+}
+
+function bfNodeClass(step, vertex) {
+
+    if (step.updated === vertex) {
+        return "bf-node is-updated";
+    }
+    if (vertex === step.source) {
+        return "bf-node is-source";
+    }
+    if (step.dist[vertex] === Infinity) {
+        return "bf-node is-unreached";
+    }
+    return "bf-node";
+}
+
+function drawBfGraph(step) {
+
+    const svg = svgElement("svg", {
+        viewBox: "0 0 " + MAP_WIDTH + " " + MAP_HEIGHT,
+        role: "img",
+        "aria-label": "گراف جهت‌دار و فاصله‌ی هر رأس از مبدأ"
+    });
+
+    // نوک پیکان‌ها (برای هر رنگ یک پیکان)
+    const defs = svgElement("defs", {});
+
+    Object.keys(BF_COLORS).forEach(function(key) {
+
+        const marker = svgElement("marker", {
+            id: "bf-arrow-" + key,
+            viewBox: "0 0 10 10",
+            refX: 7,
+            refY: 5,
+            markerWidth: 12,
+            markerHeight: 12,
+            markerUnits: "userSpaceOnUse",
+            orient: "auto"
+        });
+
+        marker.appendChild(svgElement("path", { d: "M0,0 L10,5 L0,10 z", fill: BF_COLORS[key] }));
+        defs.appendChild(marker);
+    });
+
+    svg.appendChild(defs);
+
+    // رأس‌ها روی یک بیضی چیده می‌شوند
+    const nodeRadius = 20;
+    const positions = [];
+
+    for (let v = 0; v < step.n; v++) {
+        const angle = -Math.PI / 2 + (2 * Math.PI * v) / step.n;
+        positions.push({
+            x: MAP_WIDTH / 2 + 190 * Math.cos(angle),
+            y: MAP_HEIGHT / 2 + 135 * Math.sin(angle)
+        });
+    }
+
+    function towards(from, to, distanceAlong) {
+        const length = Math.hypot(to.x - from.x, to.y - from.y);
+        return {
+            x: from.x + ((to.x - from.x) / length) * distanceAlong,
+            y: from.y + ((to.y - from.y) / length) * distanceAlong
+        };
+    }
+
+    // یال‌های برجسته‌تر آخر رسم می‌شوند تا روی بقیه بیفتند
+    const priority = { base: 0, tree: 1, skip: 2, current: 3, good: 3, bad: 4 };
+
+    const order = step.edges
+        .map(function(edge, index) { return { edge: edge, index: index, state: bfEdgeState(step, index) }; })
+        .sort(function(a, b) { return priority[a.state] - priority[b.state]; });
+
+    const weightLabels = [];
+
+    order.forEach(function(item) {
+
+        const a = positions[item.edge.from];
+        const b = positions[item.edge.to];
+
+        const dx = b.x - a.x;
+        const dy = b.y - a.y;
+        const length = Math.hypot(dx, dy);
+
+        // نقطه کنترل، یال را کمی خم می‌کند تا یال‌های رفت و برگشت روی هم نیفتند
+        const normal = { x: -dy / length, y: dx / length };
+        const control = {
+            x: (a.x + b.x) / 2 + normal.x * 50,
+            y: (a.y + b.y) / 2 + normal.y * 50
+        };
+
+        const start = towards(a, control, nodeRadius);
+        const end = towards(b, control, nodeRadius + 5);
+
+        svg.appendChild(svgElement("path", {
+            d: `M ${start.x} ${start.y} Q ${control.x} ${control.y} ${end.x} ${end.y}`,
+            class: "bf-edge is-" + item.state,
+            "marker-end": `url(#bf-arrow-${item.state})`
+        }));
+
+        weightLabels.push({
+            x: 0.25 * start.x + 0.5 * control.x + 0.25 * end.x + normal.x * 9,
+            y: 0.25 * start.y + 0.5 * control.y + 0.25 * end.y + normal.y * 9,
+            text: item.edge.w
+        });
+    });
+
+    weightLabels.forEach(function(item) {
+        const label = svgElement("text", { x: item.x, y: item.y, class: "bf-weight" });
+        label.textContent = item.text;
+        svg.appendChild(label);
+    });
+
+    positions.forEach(function(position, vertex) {
+
+        svg.appendChild(svgElement("circle", {
+            cx: position.x,
+            cy: position.y,
+            r: nodeRadius,
+            class: bfNodeClass(step, vertex)
+        }));
+
+        const name = svgElement("text", { x: position.x, y: position.y, class: "bf-label" });
+        name.textContent = vertex + 1;
+        svg.appendChild(name);
+
+        const distance = svgElement("text", {
+            x: position.x,
+            y: position.y + nodeRadius + 16,
+            class: step.updated === vertex ? "bf-dist is-updated" : "bf-dist"
+        });
+        distance.textContent = formatDistance(step.dist[vertex]);
+        svg.appendChild(distance);
+    });
+
+    bfDisplay.replaceChildren(svg);
+}
+
+function renderBfStep(step, index, total) {
+
+    drawBfGraph(step);
+
+    bfStepText.textContent = `مرحله ${index + 1} از ${total}: ${step.description}`;
+
+    if (index === total - 1) {
+
+        bfResult.replaceChildren();
+        bfResult.classList.toggle("is-warning", step.negativeCycle);
+
+        if (step.negativeCycle) {
+
+            bfResult.textContent = "چرخه منفی پیدا شد؛ کوتاه‌ترین مسیر تعریف‌شده نیست.";
+
+        } else {
+
+            const distances = document.createElement("bdi");
+            distances.dir = "ltr";
+            distances.textContent = step.dist
+                .map(function(d, v) { return (v + 1) + ": " + formatDistance(d); })
+                .join(" | ");
+
+            bfResult.append(
+                document.createTextNode(`فاصله‌ی رأس‌ها از رأس ${step.source + 1}: `),
+                distances
+            );
+        }
+
+        bfAnalysis.textContent =
+            `تعداد مقایسه‌ها: ${step.comparisons} | ` +
+            `تعداد بهبودها: ${step.relaxations} | ` +
+            `پیچیدگی زمانی: O(V·E) که V تعداد رأس‌ها (اینجا ${step.n}) و E تعداد یال‌هاست (اینجا ${step.edges.length}). ` +
+            `برخلاف دایکسترا، با وزن‌های منفی هم درست کار می‌کند و چرخه منفی را تشخیص می‌دهد.`;
+
+    } else {
+        bfResult.textContent = "";
+        bfResult.classList.remove("is-warning");
+        bfAnalysis.textContent = "";
+    }
+}
+
+const bfStepper = createStepper(
+    { prev: bfPrev, next: bfNext, auto: bfAuto, reset: bfReset },
+    renderBfStep,
+    function() {
+        bfDisplay.replaceChildren();
+        bfStepText.textContent = "هنوز الگوریتم شروع نشده است.";
+        bfResult.textContent = "";
+        bfResult.classList.remove("is-warning");
+        bfAnalysis.textContent = "";
+    }
+);
+
+function startBellmanFord() {
+
+    bfStepper.stop();
+
+    const parsed = parseEdges(bfInput.value);
+
+    if (parsed === null) {
+        return;
+    }
+
+    const source = Number(bfSource.value);
+
+    if (!Number.isInteger(source) || source < 1 || source > parsed.n) {
+        alert(`رأس مبدأ باید عددی صحیح بین 1 تا ${parsed.n} باشد.`);
+        return;
+    }
+
+    bfStepper.load(generateBellmanFordSteps(parsed.n, parsed.edges, source - 1));
+}
+
+bfStart.addEventListener("click", startBellmanFord);
+
+bfSampleNeg.addEventListener("click", function() {
+    bfInput.value = "1 2 1, 2 3 -1, 3 4 -1, 4 2 -1";
+    bfSource.value = "1";
+    startBellmanFord();
+});
+
+
+// ================================
+// 8. کوله‌پشتی صفر و یک (0/1 Knapsack)
+// ================================
+
+const KP_MAX_ITEMS = 7;
+const KP_MAX_CAPACITY = 15;
+
+// «2 3, 3 4» را به فهرست اقلام تبدیل می‌کند: هر قلم = وزن و ارزش
+function parseKnapsackItems(rawInput) {
+
+    const normalized = rawInput.trim()
+        .replace(/[۰-۹]/g, function(d) { return "۰۱۲۳۴۵۶۷۸۹".indexOf(d); })
+        .replace(/[٠-٩]/g, function(d) { return "٠١٢٣٤٥٦٧٨٩".indexOf(d); });
+
+    if (normalized === "") {
+        alert("لطفاً اقلام را وارد کن.");
+        return null;
+    }
+
+    const parts = normalized.split(/[,،;\n]+/).filter(function(p) {
+        return p.trim() !== "";
+    });
+
+    if (parts.length === 0 || parts.length > KP_MAX_ITEMS) {
+        alert(`تعداد اقلام باید بین 1 تا ${KP_MAX_ITEMS} باشد.`);
+        return null;
+    }
+
+    const items = [];
+
+    for (const part of parts) {
+
+        const pair = part.trim().split(/\s+/).map(Number);
+
+        if (
+            pair.length !== 2 ||
+            !Number.isInteger(pair[0]) || pair[0] < 1 ||
+            !Number.isInteger(pair[1]) || pair[1] < 1
+        ) {
+            alert("هر قلم باید به شکل «وزن ارزش» و با دو عدد صحیح مثبت نوشته شود. مثلاً 3 4");
+            return null;
+        }
+
+        items.push({ weight: pair[0], value: pair[1] });
+    }
+
+    return items;
+}
+
+function generateKnapsackSteps(items, capacity) {
+
+    const n = items.length;
+    const dp = [];
+
+    for (let i = 0; i <= n; i++) {
+        dp.push(new Array(capacity + 1).fill(null));
+    }
+
+    const history = [];
+    let comparisons = 0;
+
+    function snapshot(extra) {
+        history.push(Object.assign({
+            dp: dp.map(function(row) { return [...row]; }),
+            current: null,
+            skipFrom: null,
+            takeFrom: null,
+            path: [],
+            final: false,
+            description: ""
+        }, extra));
+    }
+
+    snapshot({
+        description: "جدول خالی است. سطر i و ستون w یعنی بیشترین ارزش با i قلم اول و ظرفیت w."
+    });
+
+    // سطر صفر: بدون هیچ قلمی ارزش همیشه صفر است
+    for (let w = 0; w <= capacity; w++) {
+        dp[0][w] = 0;
+    }
+
+    snapshot({
+        description: "سطر صفر: وقتی هیچ قلمی نداریم، ارزش در هر ظرفیتی صفر است."
+    });
+
+    // پر کردن جدول
+    for (let i = 1; i <= n; i++) {
+
+        const item = items[i - 1];
+
+        for (let w = 0; w <= capacity; w++) {
+
+            const skip = dp[i - 1][w];
+
+            if (item.weight > w) {
+
+                dp[i][w] = skip;
+
+                snapshot({
+                    current: [i, w],
+                    skipFrom: [i - 1, w],
+                    description:
+                        `قلم ${i} (وزن ${item.weight}) در ظرفیت ${w} جا نمی‌شود؛ ` +
+                        `پس مقدار خانه‌ی بالایی (${skip}) را می‌گیریم.`
+                });
+
+            } else {
+
+                const take = dp[i - 1][w - item.weight] + item.value;
+                comparisons++;
+
+                dp[i][w] = Math.max(skip, take);
+
+                const verdict = take > skip
+                    ? `برداشتن قلم ${i} بهتر است: ${ltr(take + " > " + skip)}`
+                    : `برنداشتن قلم ${i} بهتر یا برابر است: ${ltr(skip + " ≥ " + take)}`;
+
+                snapshot({
+                    current: [i, w],
+                    skipFrom: [i - 1, w],
+                    takeFrom: [i - 1, w - item.weight],
+                    description:
+                        `قلم ${i} در ظرفیت ${w}: برنداشتن = ${skip}، ` +
+                        `برداشتن = ${ltr(dp[i - 1][w - item.weight] + " + " + item.value + " = " + take)}. ` +
+                        `${verdict} ← ${dp[i][w]}`
+                });
+            }
+        }
+    }
+
+    // بازگشت روی جدول برای پیدا کردن اقلام انتخاب‌شده
+    const path = [];
+    const chosen = [];
+    let w = capacity;
+
+    for (let i = n; i >= 1; i--) {
+
+        const took = dp[i][w] !== dp[i - 1][w];
+
+        snapshot({
+            current: [i, w],
+            path: path.slice(),
+            description: took
+                ? `خانه‌ی (${i}, ${w}) با خانه‌ی بالایی فرق دارد، پس قلم ${i} برداشته شده است. ظرفیت باقی‌مانده: ${w - items[i - 1].weight}`
+                : `خانه‌ی (${i}, ${w}) با خانه‌ی بالایی برابر است، پس قلم ${i} برداشته نشده است.`
+        });
+
+        path.push([i, w]);
+
+        if (took) {
+            chosen.push(i);
+            w -= items[i - 1].weight;
+        }
+    }
+
+    path.push([0, w]);
+    chosen.reverse();
+
+    let totalWeight = 0;
+    chosen.forEach(function(i) { totalWeight += items[i - 1].weight; });
+
+    snapshot({
+        path: path.slice(),
+        final: true,
+        chosen: chosen,
+        totalWeight: totalWeight,
+        totalValue: dp[n][capacity],
+        comparisons: comparisons,
+        n: n,
+        capacity: capacity,
+        description: "الگوریتم تمام شد! مسیر سبز نشان می‌دهد کدام اقلام انتخاب شده‌اند."
+    });
+
+    return history;
+}
+
+function sameCell(a, b) {
+    return a !== null && b !== null && a[0] === b[0] && a[1] === b[1];
+}
+
+function drawKnapsackTable(step, items) {
+
+    kpDisplay.replaceChildren();
+
+    const capacity = step.dp[0].length - 1;
+    const table = document.createElement("table");
+    table.className = "kp-table";
+
+    // سطر عنوان: ظرفیت‌ها
+    const headRow = document.createElement("tr");
+
+    const corner = document.createElement("th");
+    corner.dir = "rtl";
+    corner.textContent = "ظرفیت";
+    headRow.appendChild(corner);
+
+    for (let w = 0; w <= capacity; w++) {
+        const th = document.createElement("th");
+        th.textContent = w;
+        headRow.appendChild(th);
+    }
+
+    table.appendChild(headRow);
+
+    // سطرهای جدول
+    step.dp.forEach(function(row, i) {
+
+        const tr = document.createElement("tr");
+
+        const head = document.createElement("th");
+        head.className = "kp-row-head";
+        head.dir = "rtl";
+
+        if (i === 0) {
+            head.textContent = "بدون قلم";
+        } else {
+            head.append(document.createTextNode(`قلم ${i}`));
+            const small = document.createElement("small");
+            small.textContent = `وزن ${items[i - 1].weight} · ارزش ${items[i - 1].value}`;
+            head.appendChild(small);
+        }
+
+        tr.appendChild(head);
+
+        row.forEach(function(value, w) {
+
+            const td = document.createElement("td");
+            const cell = [i, w];
+            const classes = ["kp-cell"];
+
+            if (value === null) {
+                classes.push("is-empty");
+            }
+
+            if (sameCell(cell, step.current)) {
+                classes.push("is-current");
+            } else if (sameCell(cell, step.skipFrom)) {
+                classes.push("is-skip");
+            } else if (sameCell(cell, step.takeFrom)) {
+                classes.push("is-take");
+            } else if (step.path.some(function(p) { return sameCell(cell, p); })) {
+                classes.push("is-path");
+            }
+
+            td.className = classes.join(" ");
+            td.textContent = value === null ? "" : value;
+            tr.appendChild(td);
+        });
+
+        table.appendChild(tr);
+    });
+
+    kpDisplay.appendChild(table);
+}
+
+let kpItems = [];
+
+function renderKnapsackStep(step, index, total) {
+
+    drawKnapsackTable(step, kpItems);
+
+    kpStepText.textContent = `مرحله ${index + 1} از ${total}: ${step.description}`;
+
+    if (index === total - 1) {
+
+        kpResult.textContent = step.chosen.length === 0
+            ? "هیچ قلمی انتخاب نشد."
+            : `اقلام انتخاب‌شده: ${ltr(step.chosen.join(", "))} | ` +
+              `وزن کل: ${ltr(step.totalWeight + " از " + step.capacity)} | ` +
+              `بیشترین ارزش: ${ltr(String(step.totalValue))}`;
+
+        kpAnalysis.textContent =
+            `تعداد مقایسه‌ها: ${step.comparisons} | ` +
+            `پیچیدگی زمان و حافظه: O(n·W) که n تعداد اقلام (اینجا ${step.n}) و W ظرفیت (اینجا ${step.capacity}) است. ` +
+            `این الگوریتم برنامه‌ریزی پویاست و برخلاف روش حریصانه همیشه جواب بهینه می‌دهد.`;
+
+    } else {
+        kpResult.textContent = "";
+        kpAnalysis.textContent = "";
+    }
+}
+
+const kpStepper = createStepper(
+    { prev: kpPrev, next: kpNext, auto: kpAuto, reset: kpReset },
+    renderKnapsackStep,
+    function() {
+        kpDisplay.replaceChildren();
+        kpStepText.textContent = "هنوز الگوریتم شروع نشده است.";
+        kpResult.textContent = "";
+        kpAnalysis.textContent = "";
+    }
+);
+
+kpStart.addEventListener("click", function() {
+
+    kpStepper.stop();
+
+    const items = parseKnapsackItems(kpInput.value);
+
+    if (items === null) {
+        return;
+    }
+
+    const capacity = Number(kpCapacity.value);
+
+    if (!Number.isInteger(capacity) || capacity < 1 || capacity > KP_MAX_CAPACITY) {
+        alert(`ظرفیت باید عددی صحیح بین 1 تا ${KP_MAX_CAPACITY} باشد.`);
+        return;
+    }
+
+    kpItems = items;
+    kpStepper.load(generateKnapsackSteps(items, capacity));
+});
+
+
+
+// ================================
+// 9. کدگذاری هافمن
+// ================================
+function parseHuffmanInput(raw) {
+    const entries = raw.split(/[،,]+/).map(x => x.trim()).filter(Boolean);
+    if (entries.length < 2 || entries.length > 12) {
+        alert("لطفاً بین ۲ تا ۱۲ نماد وارد کن."); return null;
+    }
+    const seen = new Set();
+    const result = [];
+    for (const entry of entries) {
+        const m = entry.match(/^(.+?)\s*:\s*(\d+)$/);
+        if (!m) { alert(`قالب «${entry}» نامعتبر است؛ مثل A:5 بنویس.`); return null; }
+        const symbol = m[1].trim(), frequency = Number(m[2]);
+        if (!symbol || !Number.isSafeInteger(frequency) || frequency <= 0 || seen.has(symbol)) {
+            alert("نمادها باید یکتا باشند و فراوانی‌ها عدد صحیح مثبت باشند."); return null;
+        }
+        seen.add(symbol); result.push({symbol, frequency});
+    }
+    return result;
+}
+function cloneHuffmanNode(n) {
+    return {id:n.id, symbol:n.symbol, frequency:n.frequency,
+        left:n.left ? cloneHuffmanNode(n.left) : null,
+        right:n.right ? cloneHuffmanNode(n.right) : null};
+}
+function generateHuffmanSteps(symbols) {
+    let id = 0;
+    let forest = symbols.map(x => ({id:id++, symbol:x.symbol, frequency:x.frequency, left:null, right:null}));
+    forest.sort((a,b) => a.frequency-b.frequency || a.id-b.id);
+    const steps = [];
+    function snapshot(description, selected=[], merged=null, final=false, codes=null) {
+        steps.push({forest:forest.map(cloneHuffmanNode), selected, merged:merged ? cloneHuffmanNode(merged):null, description, final, codes});
+    }
+    snapshot("گره‌های اولیه مرتب شدند. در هر مرحله دو گره با کمترین فراوانی انتخاب می‌شوند.");
+    while (forest.length > 1) {
+        forest.sort((a,b) => a.frequency-b.frequency || a.id-b.id);
+        const left=forest.shift(), right=forest.shift();
+        snapshot(`دو گره با فراوانی ${left.frequency} و ${right.frequency} انتخاب شدند.`, [left.id,right.id]);
+        const parent={id:id++, symbol:null, frequency:left.frequency+right.frequency, left, right};
+        forest.push(parent);
+        snapshot(`گره جدید با فراوانی ${parent.frequency} ساخته شد و دو گره انتخابی فرزندهای آن شدند.`, [], parent);
+    }
+    const codes={};
+    function visit(n, prefix) {
+        if (!n.left && !n.right) { codes[n.symbol]=prefix || "0"; return; }
+        visit(n.left,prefix+"0"); visit(n.right,prefix+"1");
+    }
+    visit(forest[0],"");
+    snapshot("درخت کامل شد؛ مسیر چپ کد ۰ و مسیر راست کد ۱ می‌سازد.", [], forest[0], true, codes);
+    return steps;
+}
+function renderHuffmanNode(node, selected=[], mergedId=null) {
+    const wrap=document.createElement("div"); wrap.className="hf-node-wrap";
+    const box=document.createElement("div");
+    box.className="hf-node"+(node.left ? "" : " is-leaf")+(selected.includes(node.id)?" is-selected":"")+(node.id===mergedId?" is-merged":"");
+    box.textContent=`${node.symbol===null?"●":node.symbol} · ${node.frequency}`;
+    wrap.appendChild(box);
+    if (node.left || node.right) {
+        const children=document.createElement("div"); children.className="hf-children";
+        [[node.left,"0"],[node.right,"1"]].forEach(([child,bit])=>{
+            const branch=document.createElement("div"); branch.className="hf-branch";
+            const label=document.createElement("span"); label.className="hf-bit"; label.textContent=bit; branch.appendChild(label);
+            if(child) branch.appendChild(renderHuffmanNode(child,selected,null));
+            children.appendChild(branch);
+        });
+        wrap.appendChild(children);
+    }
+    return wrap;
+}
+let hfSymbols=[];
+function renderHuffmanStep(step,index,total) {
+    hfForest.replaceChildren();
+    step.forest.forEach(n=>hfForest.appendChild(renderHuffmanNode(n,step.selected,step.merged && step.merged.id)));
+    hfStepText.textContent=`مرحله ${index+1} از ${total}: ${step.description}`;
+    hfCodes.replaceChildren();
+    if(step.final) {
+        const table=document.createElement("table"); table.className="hf-code-table";
+        const head=document.createElement("tr");
+        ["نماد","فراوانی","کد هافمن"].forEach(v=>{const th=document.createElement("th");th.textContent=v;head.appendChild(th);});
+        table.appendChild(head);
+        hfSymbols.forEach(item=>{
+            const row=document.createElement("tr");
+            [item.symbol,item.frequency,step.codes[item.symbol]].forEach(v=>{const td=document.createElement("td");td.textContent=v;row.appendChild(td);});
+            table.appendChild(row);
+        });
+        hfCodes.appendChild(table);
+        const totalFreq=hfSymbols.reduce((a,x)=>a+x.frequency,0);
+        const bits=hfSymbols.reduce((a,x)=>a+x.frequency*step.codes[x.symbol].length,0);
+        hfResult.textContent="کدگذاری کامل شد؛ نمادهای پرتکرار معمولاً کدهای کوتاه‌تری دارند.";
+        hfAnalysis.textContent=`مجموع فراوانی‌ها: ${totalFreq} | تعداد بیت‌های وزن‌دار: ${bits} | میانگین طول کد: ${(bits/totalFreq).toFixed(2)} بیت برای هر نماد.`;
+    } else { hfResult.textContent=""; hfAnalysis.textContent=""; }
+}
+const hfStepper=createStepper({prev:hfPrev,next:hfNext,auto:hfAuto,reset:hfReset},renderHuffmanStep,function(){
+    hfForest.replaceChildren(); hfStepText.textContent="هنوز الگوریتم شروع نشده است.";
+    hfCodes.replaceChildren(); hfResult.textContent=""; hfAnalysis.textContent="";
+});
+hfStart.addEventListener("click",function(){
+    hfStepper.stop(); const symbols=parseHuffmanInput(hfInput.value); if(!symbols)return;
+    hfSymbols=symbols; hfStepper.load(generateHuffmanSteps(symbols));
+});
+
+// ================================
+// 10. نمایش توضیحات الگوریتم‌ها
+// ================================
+
+buttons.forEach(function(button, index) {
+    button.addEventListener("click", function() {
+
+        title.textContent = algorithms[index].name;
+        description.textContent = algorithms[index].description;
+
+        details.hidden = false;
+
+        insertionLab.hidden = index !== 0;
+        quickLab.hidden = index !== 1;
+        tspLab.hidden = index !== 2;
+        bfLab.hidden = index !== 3;
+        kpLab.hidden = index !== 4;
+        hfLab.hidden = index !== 5;
+
+        insertionStepper.stop();
+        quickStepper.stop();
+        tspStepper.stop();
+        bfStepper.stop();
+        kpStepper.stop();
+        hfStepper.stop();
+
+        details.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+    });
+});
+
+backButton.addEventListener("click", function() {
+    insertionStepper.stop();
+    quickStepper.stop();
+    tspStepper.stop();
+    bfStepper.stop();
+    kpStepper.stop();
+    hfStepper.stop();
+    details.hidden = true;
+});
+
+
+// ================================
+// 10. وضعیت اولیه
+// ================================
+
+insertionStepper.clear();
+quickStepper.clear();
+tspStepper.clear();
+bfStepper.clear();
+kpStepper.clear();
+hfStepper.clear();
+
+// ================================
+// Persian / English localization (optimized; no page reload required)
+// ================================
+(() => {
+    const languageButton = document.getElementById('language-toggle');
+    const phrases = {
+      'AlgoVerse | دنیای الگوریتم‌ها':'AlgoVerse | The World of Algorithms',
+      'مرتب‌سازی درجی (Insertion Sort)':'Insertion Sort',
+      'عناصر را یکی‌یکی بررسی می‌کند و هر عنصر را در جای مناسبش میان عناصر مرتب‌شده قرار می‌دهد.':'Examines elements one by one and inserts each into its proper position among the sorted elements.',
+      'مرتب‌سازی سریع (Quick Sort)':'Quick Sort',
+      'یک عنصر را به‌عنوان محور (Pivot) انتخاب می‌کند، بقیه را به دو گروه کوچک‌تر و بزرگ‌تر از محور تقسیم می‌کند و همین کار را به‌صورت بازگشتی روی هر گروه تکرار می‌کند. میانگین پیچیدگی زمانی آن O(n log n) و بدترین حالت آن O(n²) است.':'Selects an element as the pivot, partitions the others into smaller and larger groups, and recursively repeats this process for each group. Its average time complexity is O(n log n), and its worst case is O(n²).',
+      'فروشنده دوره‌گرد (Traveling Salesperson)':'Traveling Salesperson',
+      'هدف، یافتن کوتاه‌ترین دوری است که از شهرها عبور کند و به شهر شروع برگردد.':'The goal is to find the shortest tour that visits the cities and returns to the starting city.',
+      'بلمن–فورد (Bellman–Ford)':'Bellman–Ford',
+      'کوتاه‌ترین مسیرها را از یک رأس مبدأ در گراف محاسبه می‌کند و چرخه منفی قابل‌دسترسی را تشخیص می‌دهد.':'Computes shortest paths from a source vertex in a graph and detects reachable negative cycles.',
+      'کوله‌پشتی صفر و یک (0/1 Knapsack)':'0/1 Knapsack',
+      'اقلامی را انتخاب می‌کند که با رعایت ظرفیت کوله‌پشتی، بیشترین ارزش را داشته باشند.':'Selects items that maximize total value without exceeding the knapsack capacity.',
+      'کدگذاری هافمن (Huffman Coding)':'Huffman Coding',
+      'با استفاده از فراوانی نمادها، کدهای دودویی با طول متغیر تولید می‌کند.':'Uses symbol frequencies to generate variable-length binary codes.',
+      'فونت وزیرمتن':'Vazirmatn font', 'حالت تیره':'Dark mode', 'حالت روشن':'Light mode',
+      'آزمایشگاه الگوریتم‌ها':'Algorithm Lab', 'از ایده تا اجرا؛ الگوریتم‌ها را قدم‌به‌قدم کشف کن.':'From idea to execution — explore algorithms step by step.',
+      'فضای یادگیری تعاملی':'Interactive learning space', 'الگوریتم‌ها را فقط نخوان؛':'Don’t just read about algorithms;', 'اجراشان کن.':'run them.',
+      'ورودی بده، مراحل را دنبال کن و نتیجه را با چشم خودت ببین.':'Enter input, follow each step, and see the result for yourself.',
+      'کتابخانه الگوریتم‌ها':'Algorithm Library','از کجا شروع می‌کنیم؟':'Where shall we start?','۶ آزمایشگاه تعاملی':'6 interactive labs',
+      'مرتب‌سازی':'Sorting','مرتب‌سازی درجی':'Insertion Sort','مرتب‌سازی سریع':'Quick Sort','بهینه‌سازی':'Optimization','فروشنده دوره‌گرد':'Traveling Salesperson',
+      'گراف و مسیر':'Graphs & Paths','بلمن–فورد':'Bellman–Ford','برنامه‌ریزی پویا':'Dynamic Programming','کوله‌پشتی صفر و یک':'0/1 Knapsack','فشرده‌سازی':'Compression','الگوریتم هافمن':'Huffman Coding','شروع یادگیری':'Start learning',
+      'آزمایشگاه مرتب‌سازی درجی':'Insertion Sort Lab','چند عدد وارد کن و مراحل مرتب‌سازی را ببین.':'Enter some numbers and watch the sorting steps.',
+      'اعداد موردنظر:':'Numbers:','شروع مرتب‌سازی':'Start sorting','وضعیت اعداد':'Number states','عدد در حال جاگذاری':'Key being inserted','یک خانه به راست رفته':'Shifted one place right','بخش مرتب‌شده':'Sorted section','تازه جا افتاده':'Just placed','هنوز بررسی نشده':'Not checked yet','هنوز مرتب‌سازی شروع نشده است.':'Sorting has not started yet.',
+      'مرحله قبل':'Previous step','مرحله بعد':'Next step','اجرای خودکار':'Auto-play','شروع مجدد':'Reset','آزمایشگاه مرتب‌سازی سریع':'Quick Sort Lab',
+      'چند عدد وارد کن (حداکثر ۳۰ عدد). در هر بازه، آخرین عنصر به‌عنوان محور انتخاب می‌شود.':'Enter numbers (up to 30). In each range, the last element is selected as the pivot.',
+      'محور':'Pivot','در حال مقایسه':'Comparing','کوچک‌تر از محور':'Less than pivot','بزرگ‌تر از محور':'Greater than pivot','در جای نهایی':'In final position',
+      'آزمایشگاه فروشنده دوره‌گرد':'Traveling Salesperson Lab','تعداد شهرها را وارد کن (۳ تا ۹ شهر). شهرها به‌صورت تصادفی روی نقشه ساخته می‌شوند و الگوریتم همه دورهای ممکن را از شهر ۱ بررسی می‌کند تا کوتاه‌ترین دور را پیدا کند.':'Enter the number of cities (3–9). Cities are placed randomly on the map, and the algorithm checks every possible tour starting from City 1 to find the shortest one.',
+      'تعداد شهرها:':'Number of cities:','ساخت شهرها و شروع':'Create cities & start','وضعیت نقشه':'Map status','شهر شروع':'Starting city','سایر شهرها':'Other cities','بهترین دور تا این لحظه':'Best tour so far','کوتاه‌ترین دور نهایی':'Final shortest tour','هنوز جست‌وجو شروع نشده است.':'The search has not started yet.',
+      'آزمایشگاه بلمن–فورد':'Bellman–Ford Lab','گراف جهت‌دار را با فهرست یال‌ها وارد کن. هر یال به شکل «مبدأ مقصد وزن» نوشته می‌شود و یال‌ها با ویرگول از هم جدا می‌شوند (حداکثر ۸ رأس و ۲۰ یال؛ وزن می‌تواند منفی باشد). یال‌های سبزِ باریک، بهترین مسیر فعلی به هر رأس را نشان می‌دهند و عدد زیر هر رأس، فاصله‌ی فعلی آن از مبدأ است.':'Enter a directed graph as an edge list. Each edge uses “source destination weight”, separated by commas (up to 8 vertices and 20 edges; weights may be negative). Thin green edges show the best current path to each vertex; the number below each vertex is its current distance from the source.',
+      'یال‌ها:':'Edges:','رأس مبدأ:':'Source vertex:','شروع الگوریتم':'Run algorithm','نمونه با چرخه منفی':'Example with a negative cycle','وضعیت گراف':'Graph status','رأس مبدأ':'Source vertex','رأس قابل‌دسترسی':'Reachable vertex','هنوز ناپیدا (∞)':'Not reached yet (∞)','بهبود تازه (یال یا رأس)':'Recently improved (edge or vertex)','یال بررسی‌شده بدون بهبود':'Checked edge, no improvement','یال در دور بررسی چرخه منفی':'Edge checked for a negative cycle','یال چرخه منفی':'Negative-cycle edge','هنوز الگوریتم شروع نشده است.':'The algorithm has not started yet.',
+      'آزمایشگاه کوله‌پشتی صفر و یک':'0/1 Knapsack Lab','اقلام را به شکل «وزن ارزش» بنویس و با ویرگول از هم جدا کن (حداکثر ۷ قلم)، سپس ظرفیت کوله‌پشتی را وارد کن (حداکثر ۱۵). هر قلم یا کامل برداشته می‌شود یا اصلاً برداشته نمی‌شود. جدول برنامه‌ریزی پویا خانه‌به‌خانه پر می‌شود: هر خانه، بیشترین ارزشِ ممکن با چند قلم اول و ظرفیتِ همان ستون است.':'Enter items as “weight value”, separated by commas (up to 7 items), then enter the knapsack capacity (up to 15). Each item is either taken whole or not taken. The dynamic-programming table is filled cell by cell; each cell stores the maximum value possible using the first items at that column’s capacity.',
+      'اقلام (وزن ارزش):':'Items (weight value):','ظرفیت:':'Capacity:','وضعیت جدول':'Table status','خانه‌ی در حال محاسبه':'Cell being calculated','گزینه‌ی «برنداشتن قلم»':'Option: skip item','گزینه‌ی «برداشتن قلم»':'Option: take item','مسیر انتخاب نهایی':'Final selected path','هنوز محاسبه نشده':'Not calculated yet','آزمایشگاه کدگذاری هافمن':'Huffman Coding Lab','نمادها و فراوانی‌ها را به شکل «A:5, B:2, C:1» وارد کن (۲ تا ۱۲ نماد، با فراوانی مثبت).':'Enter symbols and frequencies as “A:5, B:2, C:1” (2–12 symbols, with positive frequencies).','نمادها و فراوانی‌ها:':'Symbols and frequencies:','ساخت درخت هافمن':'Build Huffman tree','ساخت درخت مرحله‌به‌مرحله':'Build the tree step by step','دو گره انتخاب‌شده':'Two selected nodes','نماد / برگ':'Symbol / leaf','گره ادغام‌شده':'Merged node','بازگشت به فهرست':'Back to list','یادگیری، اجرا و تحلیل الگوریتم‌ها':'Learn, run, and analyze algorithms',
+      'هنوز الگوریتم شروع نشده است.':'The algorithm has not started yet.','هنوز مرتب‌سازی شروع نشده است.':'Sorting has not started yet.',
+      'مثلاً 5, 2, 4, 1, 3':'e.g. 5, 2, 4, 1, 3','مثلاً 8, 3, 7, 1, 5, 9, 2':'e.g. 8, 3, 7, 1, 5, 9, 2','مثلاً 2 3, 3 4, 4 5':'e.g. 2 3, 3 4, 4 5','A:5, B:2, C:1':'A:5, B:2, C:1',
+      'ورودی نامعتبر است. حداکثر ${maxCount} عدد معتبر وارد کن.':'Invalid input. Enter up to ${maxCount} valid numbers.',
+      'بازه ${low + 1} تا ${high + 1}: عدد ${pivotValue} (آخرین عنصر بازه) به‌عنوان محور انتخاب شد.':'Range ${low + 1} to ${high + 1}: ${pivotValue} (the last element) was selected as the pivot.',
+      'تعداد جابه‌جایی‌ها: ${step.swaps} |':'Swaps: ${step.swaps} |',
+      'تعداد مقایسه‌ها: ${step.comparisons} |':'Comparisons: ${step.comparisons} |',
+      'تعداد دورهای بررسی‌شده: ${step.checked} |':'Tours checked: ${step.checked} |',
+      'پیچیدگی زمانی: بهترین حالت O(n)، میانگین و بدترین حالت O(n²).':'Time complexity: best case O(n); average and worst case O(n²).',
+      'پیچیدگی زمانی: بهترین و میانگین O(n log n)، بدترین حالت O(n²)':'Time complexity: best and average O(n log n); worst case O(n²).',
+      'الگوریتم تمام شد؛ فاصله‌ی نهایی همه رأس‌ها از مبدأ مشخص است.':'Algorithm finished; final distances from the source are known for all vertices.',
+      'چرخه منفی پیدا شد؛ کوتاه‌ترین مسیر تعریف‌شده نیست.':'A negative cycle was found; the shortest path is undefined.',
+      'گره‌های اولیه مرتب شدند. در هر مرحله دو گره با کمترین فراوانی انتخاب می‌شوند.':'Initial nodes sorted. At each step, the two nodes with the lowest frequencies are selected.',
+      'درخت کامل شد؛ مسیر چپ کد ۰ و مسیر راست کد ۱ می‌سازد.':'The tree is complete; left branches encode 0 and right branches encode 1.',
+      'نمادها باید یکتا باشند و فراوانی‌ها عدد صحیح مثبت باشند.':'Symbols must be unique and frequencies must be positive integers.',
+      'هر قلم باید به شکل «وزن ارزش» و با دو عدد صحیح مثبت نوشته شود. مثلاً 3 4':'Each item must be entered as “weight value” using two positive integers, e.g. 3 4.',
+      'تعداد اقلام باید بین 1 تا ${KP_MAX_ITEMS} باشد.':'The number of items must be between 1 and ${KP_MAX_ITEMS}.',
+      'تعداد شهرها باید یک عدد صحیح بین ۳ تا ۹ باشد.':'The number of cities must be an integer between 3 and 9.',
+      'لطفاً بین ۲ تا ۱۲ نماد وارد کن.':'Please enter 2 to 12 symbols.',
+      'لطفاً چند عدد وارد کن.':'Please enter some numbers.',
+      'لطفاً حداقل یک یال وارد کن. مثلاً: 1 2 5':'Please enter at least one edge. Example: 1 2 5.','لطفاً چند عدد وارد کن.':'Please enter some numbers.','ورودی نامعتبر است. حداکثر ${maxCount} عدد معتبر وارد کن.':'Invalid input. Enter at most ${maxCount} valid numbers.','نتیجه نهایی:':'Final result:','توقف':'Pause','وضعیت اولیه اعداد':'Initial number state','مرتب‌سازی با موفقیت تمام شد!':'Sorting completed successfully!','مرحله ${index + 1} از ${total}: ${step.description}':'Step ${index + 1} of ${total}: ${step.description}',
+      'تعداد شهرها باید یک عدد صحیح بین ۳ تا ۹ باشد.':'The number of cities must be an integer from 3 to 9.','لطفاً حداقل یک یال وارد کن. مثلاً: 1 2 5':'Please enter at least one edge. Example: 1 2 5','شروع الگوریتم':'Run algorithm','لطفاً اقلام را وارد کن.':'Please enter the items.','ظرفیت':'Capacity','بدون قلم':'No items','نماد':'Symbol','فراوانی':'Frequency','کد هافمن':'Huffman code','کدگذاری کامل شد؛ نمادهای پرتکرار معمولاً کدهای کوتاه‌تری دارند.':'Encoding complete; frequent symbols usually receive shorter codes.'
+    };
+    const replacements = [
+      ['لطفاً','Please'],['وارد کن','enter'],['وارد کنید','enter'],['شروع نشده است','has not started'],['الگوریتم','algorithm'],['مرتب‌سازی','sorting'],['مرحله','Step'],['تعداد','Number of'],['معتبر نیست','is invalid'],['باید','must be'],['بین','between'],['رأس','vertex'],['یال','edge'],['وزن','weight'],['فاصله','distance'],['چرخه منفی','negative cycle'],['پیدا شد','found'],['پیدا نشد','not found'],['تغییری نمی‌کند','no change'],['تغییر نکرد','did not change'],['مبدأ','source'],['شهر','city'],['کوتاه‌ترین','shortest'],['مسیر','path'],['ظرفیت','capacity'],['قلم','item'],['ارزش','value'],['انتخاب شد','selected'],['انتخاب شده','selected'],['ساخته شد','created'],['تمام شد','completed'],['مقایسه','comparison'],['جابه‌جایی','swap'],['پیچیدگی زمانی','Time complexity'],['بهترین حالت','best case'],['میانگین','average'],['بدترین حالت','worst case'],['درخت','tree'],['نماد','symbol'],['فراوانی','frequency'],['کدگذاری','encoding'],['کد','code'],['مجموع','Total'],['بیت','bit'],['خانه','cell'],['جدول','table'],['سبز','green'],['نهایی','final'],['مثلاً','e.g.'],['عدد','number'],['گروه','group'],['کوچک‌تر','smaller'],['بزرگ‌تر','larger'],['تکرار می‌شود','is repeated'],['تغییر','change'],['خالی است','is empty'],['نامعتبر','invalid'],['نمونه','example'],['اجرا','run'],['توقف','Pause'],['لطفاً','Please'],['وارد','enter'],['معتبر','valid'],['نامعتبر','invalid'],['حداکثر','maximum'],['حداقل','minimum'],['بررسی‌شده','checked'],['بررسی','check'],['هنوز','not yet'],['شروع','start'],['تمام','complete'],['موفقیت','success'],['عدد صحیح','integer'],['مثبت','positive'],['منفی','negative'],['قابل‌دسترسی','reachable'],['قابل‌دسترسی','reachable'],['تعداد','count'],['زمانی','time'],['حافظه','memory'],['شده','done'],['می‌شود','is'],['می‌شوند','are'],['وارد کن','enter'],['وارد کنید','enter'],['بین','between'],['باید','must'],['هر','each'],['همه','all'],['انتخاب','select'],['نمایش','display'],['کوتاه‌تر','shorter'],['فراوانی‌ها','frequencies'],['نمادها','symbols'],['اقلام','items'],['شامل','includes']
+    ];
+    // Precompute longest-first keys once and cache repeated translations.
+    const phraseKeys = Object.keys(phrases).sort((a, b) => b.length - a.length);
+    const replacementCache = new Map();
+    const originalText = new WeakMap();
+    const originalAttrs = new WeakMap();
+    let translating = false;
+
+    function translateText(source) {
+      if (!source) return source;
+      if (replacementCache.has(source)) return replacementCache.get(source);
+      if (phrases[source] !== undefined) {
+        replacementCache.set(source, phrases[source]);
+        return phrases[source];
+      }
+      let out = source;
+      for (const key of phraseKeys) {
+        if (out.includes(key)) out = out.split(key).join(phrases[key]);
+      }
+      for (const [fa, en] of replacements) {
+        if (out.includes(fa)) out = out.split(fa).join(en);
+      }
+      replacementCache.set(source, out);
+      return out;
+    }
+
+    function translateAttributes(root, lang) {
+      const elements = [];
+      if (root instanceof Element) elements.push(root);
+      root.querySelectorAll?.('*').forEach(el => elements.push(el));
+      for (const el of elements) {
+        for (const attr of ['placeholder', 'title', 'aria-label']) {
+          if (!el.hasAttribute(attr)) continue;
+          let saved = originalAttrs.get(el);
+          if (!saved) { saved = {}; originalAttrs.set(el, saved); }
+          if (saved[attr] === undefined) saved[attr] = el.getAttribute(attr);
+          const next = lang === 'en' ? translateText(saved[attr]) : saved[attr];
+          if (el.getAttribute(attr) !== next) el.setAttribute(attr, next);
+        }
+      }
+    }
+
+    function walk(root = document.body, lang = document.documentElement.lang) {
+      if (!root) return;
+      const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+      let node;
+      while ((node = walker.nextNode())) {
+        const sourceNow = node.nodeValue;
+        if (!sourceNow.trim()) continue;
+        if (!originalText.has(node)) originalText.set(node, sourceNow);
+        const source = originalText.get(node);
+        const next = lang === 'en' ? translateText(source) : source;
+        if (node.nodeValue !== next) node.nodeValue = next;
+      }
+      translateAttributes(root, lang);
+    }
+
+    function applyLanguage(lang) {
+      lang = lang === 'en' ? 'en' : 'fa';
+      document.documentElement.lang = lang;
+      document.documentElement.dir = lang === 'fa' ? 'rtl' : 'ltr';
+      document.documentElement.dataset.language = lang;
+      document.title = lang === 'en' ? 'AlgoVerse | The World of Algorithms' : 'AlgoVerse | دنیای الگوریتم‌ها';
+      if (languageButton) {
+        languageButton.innerHTML = lang === 'fa' ? 'EN <span>English</span>' : 'فا <span>فارسی</span>';
+        languageButton.setAttribute('aria-label', lang === 'fa' ? 'Switch language to English' : 'تغییر زبان به فارسی');
+      }
+      try { localStorage.setItem('algovese-language', lang); } catch (e) { /* optional */ }
+      translating = true;
+      observer.disconnect();
+      walk(document.body, lang);
+      translating = false;
+      observer.observe(document.body, { subtree: true, childList: true, characterData: true, attributes: true, attributeFilter: ['placeholder', 'title', 'aria-label'] });
+    }
+
+    const observer = new MutationObserver(records => {
+      if (translating || document.documentElement.lang !== 'en') return;
+      translating = true;
+      // Only process changed nodes; never rescan the full document for every mutation.
+      for (const record of records) {
+        if (record.type === 'characterData') {
+          const node = record.target;
+          if (!node.nodeValue.trim()) continue;
+          const previousSource = originalText.get(node);
+          const expected = previousSource === undefined ? null : translateText(previousSource);
+          if (expected !== node.nodeValue) {
+            originalText.set(node, node.nodeValue);
+            const next = translateText(node.nodeValue);
+            if (node.nodeValue !== next) node.nodeValue = next;
+          }
+        } else if (record.type === 'childList') {
+          record.addedNodes.forEach(node => {
+            if (node.nodeType === Node.ELEMENT_NODE) walk(node, 'en');
+            else if (node.nodeType === Node.TEXT_NODE && node.nodeValue.trim()) {
+              originalText.set(node, node.nodeValue);
+              const next = translateText(node.nodeValue);
+              if (node.nodeValue !== next) node.nodeValue = next;
+            }
+          });
+        } else if (record.type === 'attributes' && record.target instanceof Element) {
+          const el = record.target, attr = record.attributeName;
+          if (!['placeholder', 'title', 'aria-label'].includes(attr)) continue;
+          let saved = originalAttrs.get(el);
+          if (!saved) { saved = {}; originalAttrs.set(el, saved); }
+          if (saved[attr] === undefined) saved[attr] = el.getAttribute(attr);
+          const next = translateText(saved[attr] || '');
+          if (el.getAttribute(attr) !== next) el.setAttribute(attr, next);
+        }
+      }
+      translating = false;
+    });
+
+    let savedLanguage = 'fa';
+    try { savedLanguage = localStorage.getItem('algovese-language') || 'fa'; } catch (e) { /* optional */ }
+    applyLanguage(savedLanguage === 'en' ? 'en' : 'fa');
+    if (languageButton) languageButton.addEventListener('click', () => applyLanguage(document.documentElement.lang === 'fa' ? 'en' : 'fa'));
+})();
+
+</script>
+
+</body>
+</html>
